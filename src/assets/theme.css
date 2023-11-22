@@ -1,0 +1,203 @@
+@layer {
+  :root.dark {
+    /* Call to Action */
+    --color-cta: 241 8 59;
+    --color-cta-hover: 197 7 48;
+    --color-cta-active: 163 5 40;
+    --color-cta-contrast: 255 255 255;
+
+    --color-cta-light: 89 30 41;
+    --color-cta-light-hover: 105 28 43;
+    --color-cta-light-active: 129 25 46;
+    --color-cta-light-contrast: 255 255 255;
+
+    /* Theme */
+    --color-thm: 0 150 219;
+    --color-thm-hover: 0 125 183;
+    --color-thm-active: 0 101 148;
+    --color-thm-contrast: 255 255 255;
+
+    --color-thm-light: 31 64 79;
+    --color-thm-light-hover: 28 73 94;
+    --color-thm-light-active: 23 87 116;
+    --color-thm-light-contrast: 255 255 255;
+
+    /* Highlight */
+    --color-hlt: 0 150 219;
+    --color-hlt-hover: 0 125 183;
+    --color-hlt-active: 0 101 148;
+    --color-hlt-contrast: 255 255 255;
+
+    --color-hlt-light: 24 84 113;
+    --color-hlt-light-hover: 215 242 255;
+    --color-hlt-light-active: 184 232 255;
+    --color-hlt-light-contrast: 255 255 255;
+
+    /* Functional: Success */
+    --color-suc: 54 191 120;
+    --color-suc-hover: 45 159 100;
+    --color-suc-active: 36 127 80;
+    --color-suc-contrast: 255 255 255;
+    --color-suc-light: 47 101 71;
+    --color-suc-text: 54 191 120;
+
+    /* Functional: Danger */
+    --color-err: 184 61 78;
+    --color-err-hover: 153 51 65;
+    --color-err-active: 122 41 52;
+    --color-err-contrast: 255 255 255;
+    --color-err-light: 101 47 54;
+    --color-err-text: 184 61 78;
+
+    /* Functional: Warning */
+    --color-wrn: 255 166 0;
+    --color-wrn-hover: 209 136 0;
+    --color-wrn-active: 163 106 0;
+    --color-wrn-contrast: 19 21 22;
+    --color-wrn-light: 131 91 21;
+    --color-wrn-text: 255 166 0;
+
+    /* Functional: Info */
+    --color-inf: 48 110 197;
+    --color-inf-hover: 40 92 164;
+    --color-inf-active: 32 73 131;
+    --color-inf-contrast: 255 255 255;
+    --color-inf-light: 44 67 104;
+    --color-inf-text: 48 110 197;
+
+    /* Background */
+    --color-bgr: 12 10 9;
+    --color-bgr100: 41 37 36;
+    --color-bgr200: 68 64 60;
+    --color-bgr300: 87 83 78;
+    --color-bgr400: 120 113 108;
+    --color-bgr500: 168 162 158;
+    --color-bgr600: 214 211 209;
+    --color-bgr700: 231 229 228;
+    --color-bgr800: 245 245 244;
+    --color-bgr900: 250 250 249;
+
+    /* Text & Link */
+    --color-txt: 214 211 209;
+    --color-txt100: 245 245 244;
+    --color-txt200: 231 229 228;
+    --color-txt300: 214 211 209;
+    --color-txt400: 168 162 158;
+    --color-txt500: 120 113 108;
+    --color-txt600: 87 83 78;
+    --color-txt700: 68 64 60;
+    --color-txt800: 41 37 36;
+    --color-txt900: 28 25 23;
+
+    --color-txt-link: 0 150 219;
+    --color-txt-link-hover: 0 125 183;
+    --color-txt-link-active: 0 101 148;
+    --color-txt-link-contrast: 255 255 255;
+
+    /* Misc. Colors */
+    --color-offer: 13 135 112;
+    --color-supplier: 8 86 172;
+    --color-accommodation: 7 59 116;
+  }
+
+  :root.light {
+    /* Call to Action */
+    --color-cta: 241 8 59;
+    --color-cta-hover: 197 7 48;
+    --color-cta-active: 163 5 40;
+    --color-cta-contrast: 255 255 255;
+
+    --color-cta-light: 255 240 243;
+    --color-cta-light-hover: 254 220 228;
+    --color-cta-light-active: 253 201 212;
+    --color-cta-light-contrast: 241 8 59;
+
+    /* Theme */
+    --color-thm: 0 150 219;
+    --color-thm-hover: 0 125 183;
+    --color-thm-active: 0 101 148;
+    --color-thm-contrast: 255 255 255;
+
+    --color-thm-light: 235 249 255;
+    --color-thm-light-hover: 215 242 255;
+    --color-thm-light-active: 184 232 255;
+    --color-thm-light-contrast: 0 150 219;
+
+    /* Highlight */
+    --color-hlt: 0 150 219;
+    --color-hlt-hover: 0 125 183;
+    --color-hlt-active: 0 101 148;
+    --color-hlt-contrast: 255 255 255;
+
+    --color-hlt-light: 235 249 255;
+    --color-hlt-light-hover: 215 242 255;
+    --color-hlt-light-active: 184 232 255;
+    --color-hlt-light-contrast: 0 150 219;
+
+    /* Functional: Success */
+    --color-suc: 54 191 120;
+    --color-suc-hover: 45 159 100;
+    --color-suc-active: 36 127 80;
+    --color-suc-contrast: 255 255 255;
+    --color-suc-light: 239 251 245;
+    --color-suc-text: 54 191 120;
+
+    /* Functional: Danger */
+    --color-err: 184 61 78;
+    --color-err-hover: 153 51 65;
+    --color-err-active: 122 41 52;
+    --color-err-contrast: 255 255 255;
+    --color-err-light: 250 240 241;
+    --color-err-text: 184 61 78;
+
+    /* Functional: Warning */
+    --color-wrn: 255 166 0;
+    --color-wrn-hover: 209 136 0;
+    --color-wrn-active: 163 106 0;
+    --color-wrn-contrast: 19 21 22;
+    --color-wrn-light: 255 248 235;
+    --color-wrn-text: 255 166 0;
+
+    /* Functional: Info */
+    --color-inf: 48 110 197;
+    --color-inf-hover: 40 92 164;
+    --color-inf-active: 32 73 131;
+    --color-inf-contrast: 255 255 255;
+    --color-inf-light: 235 249 255;
+    --color-inf-text: 48 110 197;
+
+    /* Background */
+    --color-bgr: 255 255 255;
+    --color-bgr100: 245 245 245;
+    --color-bgr200: 234 235 236;
+    --color-bgr300: 201 204 207;
+    --color-bgr400: 183 187 190;
+    --color-bgr500: 153 159 163;
+    --color-bgr600: 117 124 129;
+    --color-bgr700: 87 92 96;
+    --color-bgr800: 56 59 62;
+    --color-bgr900: 19 21 22;
+
+    /* Text & Link */
+    --color-txt: 0 0 0;
+    --color-txt100: 19 21 22;
+    --color-txt200: 56 59 62;
+    --color-txt300: 87 92 96;
+    --color-txt400: 117 124 129;
+    --color-txt500: 153 159 163;
+    --color-txt600: 183 187 190;
+    --color-txt700: 201 204 207;
+    --color-txt800: 234 235 236;
+    --color-txt900: 245 245 245;
+
+    --color-txt-link: 0 150 219;
+    --color-txt-link-hover: 0 125 183;
+    --color-txt-link-active: 0 101 148;
+    --color-txt-link-contrast: 255 255 255;
+
+    /* Misc. Colors */
+    --color-offer: 22 183 197;
+    --color-supplier: 87 202 255;
+    --color-accommodation: 0 101 148;
+  }
+}
