@@ -1,3 +1,4 @@
+import { useAppStore } from "~/stores/app";
 import { useThemeStore } from "~/stores/theme";
 
 /**
@@ -5,7 +6,13 @@ import { useThemeStore } from "~/stores/theme";
  * from the store. This method needs to be run on the client side.
  */
 export const syncLocalStorage = () => {
+  const appStore = useAppStore();
   const themeStore = useThemeStore();
+
+  // App Store
+  const sidebarOpen = window.localStorage.getItem("sidebarOpen") === "false" ? false : true;
+  console.log("sidebarOpen", sidebarOpen);
+  appStore.setSidebarOpen(sidebarOpen);
 
   // Theme Store
   const theme = window.localStorage.getItem("theme") || "";

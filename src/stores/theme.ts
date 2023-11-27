@@ -1,8 +1,5 @@
 import { defineStore } from "pinia";
 
-// Variables
-const THEMES = ["light", "dark"];
-
 /**
  * The store which stores the theme of the application.
  */
@@ -19,13 +16,6 @@ export const useThemeStore = defineStore("theme", {
     setTheme(theme: string) {
       this.theme = theme;
       window.localStorage.setItem("theme", theme);
-    },
-
-    /**
-     * Toggle the theme of the application between light and dark.
-     */
-    toggleTheme() {
-      this.setTheme(this.theme === "light" ? "dark" : "light");
     },
   },
 });

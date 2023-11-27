@@ -1,11 +1,16 @@
 <template>
-  <div class="bg-cta">
-    <button @click="themeStore.toggleTheme">Change theme</button>
+  <div class="text-txt">
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+
+    <AllIcons />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onBeforeMount } from "vue";
+import { AllIcons } from "webcc-ui-components";
 
 import { useThemeStore } from "~/stores/theme";
 import { syncLocalStorage } from "~/utils/localStorage";
@@ -14,12 +19,11 @@ const themeStore = useThemeStore();
 const currentTheme = computed(() => themeStore.theme);
 
 useHead({
-  title: "Vue 3 + Vite + Tailwind Starter",
   htmlAttrs: {
     class: currentTheme,
   },
   bodyAttrs: {
-    class: "bg-bgr",
+    class: "bg-bgr transition-colors duration-500",
   },
 });
 

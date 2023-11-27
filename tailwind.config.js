@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{ts,vue}"],
+  content: ["./src/**/*.{ts,vue}", "./node_modules/webcc-ui-components/**/*.js"],
   theme: {
     extend: {
       // Load the custom color variables
@@ -133,5 +133,4 @@ export default {
     },
   },
   plugins: [],
-  safelist: ["bg-thm"],
 };

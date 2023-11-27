@@ -1,5 +1,14 @@
 @import "./theme.css";
+@import "webcc-ui-components/dist/style.css";
 
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@layer components {
+  .background-texture {
+    background-color: var(--color-bgr-100);
+    background-image: url("~/assets/images/texture.png");
+    background-repeat: repeat;
+  }
+}

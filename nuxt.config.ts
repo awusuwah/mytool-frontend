@@ -22,5 +22,12 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@pinia/nuxt"],
+  // I18n
+  i18n: {
+    strategy: "no_prefix",
+    defaultLocale: "dev",
+    vueI18n: "~/i18n/i18n.config.ts",
+  },
+
+  modules: ["@pinia/nuxt", "@nuxtjs/i18n"],
 });

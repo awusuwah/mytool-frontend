@@ -200,4 +200,105 @@
     --color-supplier: 87 202 255;
     --color-accommodation: 0 101 148;
   }
+
+  :root.coffee {
+    /* Call to Action (CTA) - Using a Vibrant Coffee Cherry Red */
+    --color-cta: 169 49 36; /* Coffee Cherry Red */
+    --color-cta-hover: 149 43 32; /* Darker Coffee Cherry Red */
+    --color-cta-active: 129 37 28; /* Darkest Coffee Cherry Red */
+    --color-cta-contrast: 255 255 255; /* White for Contrast */
+
+    --color-cta-light: 252 228 216; /* Light Coffee Cherry */
+    --color-cta-light-hover: 242 208 196; /* Lighter Coffee Cherry */
+    --color-cta-light-active: 232 188 176; /* Lightest Coffee Cherry */
+    --color-cta-light-contrast: 169 49 36; /* Coffee Cherry Red */
+
+    /* Theme - Using a Creamy Latte Color */
+    --color-thm: 204 156 106; /* Latte */
+    --color-thm-hover: 184 136 96; /* Darker Latte */
+    --color-thm-active: 164 116 86; /* Darkest Latte */
+    --color-thm-contrast: 255 255 255; /* White for Contrast */
+
+    --color-thm-light: 245 237 222; /* Light Latte */
+    --color-thm-light-hover: 235 227 212; /* Lighter Latte */
+    --color-thm-light-active: 225 217 202; /* Lightest Latte */
+    --color-thm-light-contrast: 204 156 106; /* Latte */
+
+    /* Highlight - Using a Warm Caramel Color */
+    --color-hlt: 198 111 78; /* Caramel */
+    --color-hlt-hover: 178 101 68; /* Darker Caramel */
+    --color-hlt-active: 158 91 58; /* Darkest Caramel */
+    --color-hlt-contrast: 255 255 255; /* White for Contrast */
+
+    --color-hlt-light: 238 221 204; /* Light Caramel */
+    --color-hlt-light-hover: 228 211 194; /* Lighter Caramel */
+    --color-hlt-light-active: 218 201 184; /* Lightest Caramel */
+    --color-hlt-light-contrast: 198 111 78; /* Caramel */
+
+    /* Functional: Success - Keeping a Traditional Green */
+    --color-suc: 72 187 120; /* Green */
+    --color-suc-hover: 62 167 106; /* Darker Green */
+    --color-suc-active: 52 147 92; /* Darkest Green */
+    --color-suc-contrast: 255 255 255; /* White for Contrast */
+    --color-suc-light: 222 247 232; /* Light Green */
+    --color-suc-text: 72 187 120; /* Green */
+
+    /* Functional: Danger - Keeping a Traditional Red */
+    --color-err: 231 76 60; /* Red */
+    --color-err-hover: 207 68 54; /* Darker Red */
+    --color-err-active: 183 60 48; /* Darkest Red */
+    --color-err-contrast: 255 255 255; /* White for Contrast */
+    --color-err-light: 253 235 230; /* Light Red */
+    --color-err-text: 231 76 60; /* Red */
+
+    /* Functional: Warning - Keeping a Traditional Orange */
+    --color-wrn: 241 196 15; /* Orange */
+    --color-wrn-hover: 217 176 13; /* Darker Orange */
+    --color-wrn-active: 193 156 11; /* Darkest Orange */
+    --color-wrn-contrast: 255 255 255; /* White for Contrast */
+    --color-wrn-light: 254 243 199; /* Light Orange */
+    --color-wrn-text: 241 196 15; /* Orange */
+
+    /* Functional: Info - Keeping a Traditional Blue */
+    --color-inf: 52 152 219; /* Blue */
+    --color-inf-hover: 46 136 195; /* Darker Blue */
+    --color-inf-active: 40 120 171; /* Darkest Blue */
+    --color-inf-contrast: 255 255 255; /* White for Contrast */
+    --color-inf-light: 214 234 248; /* Light Blue */
+    --color-inf-text: 52 152 219; /* Blue */
+
+    /* Background */
+    --color-bgr: 33 30 27; /* Dark Espresso */
+    --color-bgr100: 43 40 37; /* Slightly Lighter Dark Espresso */
+    --color-bgr200: 53 50 47; /* Medium Dark Espresso */
+    --color-bgr300: 63 60 57; /* Medium Espresso */
+    --color-bgr400: 73 70 67; /* Lighter Espresso */
+    --color-bgr500: 83 80 77; /* Light Espresso */
+    --color-bgr600: 93 90 87; /* Very Light Espresso */
+    --color-bgr700: 103 100 97; /* Soft Espresso */
+    --color-bgr800: 113 110 107; /* Softer Espresso */
+    --color-bgr900: 123 120 117; /* Softest Espresso */
+
+    /* Text & Link */
+    --color-txt: 219 212 205; /* Light Cream Text */
+    --color-txt100: 209 202 195; /* Slightly Darker Cream Text */
+    --color-txt200: 199 192 185; /* Medium Cream Text */
+    --color-txt300: 189 182 175; /* Darker Cream Text */
+    --color-txt400: 179 172 165; /* Dark Cream Text */
+    --color-txt500: 169 162 155; /* Very Dark Cream Text */
+    --color-txt600: 159 152 145; /* Rich Cream Text */
+    --color-txt700: 149 142 135; /* Richer Cream Text */
+    --color-txt800: 139 132 125; /* Richest Cream Text */
+    --color-txt900: 129 122 115; /* Near Espresso Text */
+
+    --color-txt-link: 198 111 78; /* Caramel Link */
+    --color-txt-link-hover: 178 101 68; /* Darker Caramel Link */
+    --color-txt-link-active: 158 91 58; /* Darkest Caramel Link */
+    --color-txt-link-contrast: 255 255 255; /* White for Contrast */
+
+    /* Misc. Colors */
+    --color-offer: 150 111 78; /* Coffee Offer Brown */
+    --color-supplier: 134 94 66; /* Coffee Supplier Brown */
+    --color-accommodation: 119 84 58; /* Coffee Accommodation Brown */
+  }
 }
