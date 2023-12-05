@@ -126,7 +126,10 @@ export default {
         },
 
         // Misc. Colors
-        offer: "rgb(var(--color-offer) / <alpha-value>)",
+        offer: {
+          DEFAULT: "rgb(var(--color-offer) / <alpha-value>)",
+          contrast: "rgb(var(--color-offer-contrast) / <alpha-value>)",
+        },
         supplier: "rgb(var(--color-supplier) / <alpha-value>)",
         accommodation: "rgb(var(--color-accommodation) / <alpha-value>)",
       },

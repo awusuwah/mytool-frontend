@@ -12,8 +12,8 @@ dependencies:
     specifier: ^2.1.7
     version: 2.1.7(vue@3.3.8)
   webcc-ui-components:
-    specifier: 1.0.0-beta.13
-    version: 1.0.0-beta.13(@floating-ui/dom@1.5.3)(v-calendar@3.1.2)
+    specifier: 1.0.0-beta.15
+    version: 1.0.0-beta.15(@floating-ui/dom@1.5.3)(v-calendar@3.1.2)
 
 devDependencies:
   '@nuxt/devtools':
@@ -6466,8 +6466,8 @@ packages:
       '@vue/server-renderer': 3.3.8(vue@3.3.8)
       '@vue/shared': 3.3.8
 
-  /webcc-ui-components@1.0.0-beta.13(@floating-ui/dom@1.5.3)(v-calendar@3.1.2):
-    resolution: {integrity: sha512-3Zqd0y29/0KuP0iYAhb27q0lcIJJa6bFj/wodfiX4d3Hz1VC6vwe4ePryIM8nKbPaKdGOxQEhnxXLvTifoNHHg==}
+  /webcc-ui-components@1.0.0-beta.15(@floating-ui/dom@1.5.3)(v-calendar@3.1.2):
+    resolution: {integrity: sha512-+fPgaX1C4DLbTCEYyemo4tiKzjJaH6r5u4cWiD7JCkBGrhmuZ84EZr+YgwJdqN6jooWo/kBGwffSuJ4SRApNCA==}
     peerDependencies:
       '@floating-ui/dom': 1.5.3
       v-calendar: 3.1.2

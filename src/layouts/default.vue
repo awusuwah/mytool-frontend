@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import Navigation from "@/navigation/Navigation";
+import Navigation from "@/navigation/Navigation.vue";
 
 import { useAppStore } from "~/stores/app";
 

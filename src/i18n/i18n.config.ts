@@ -30,6 +30,18 @@ export default {
         settings: {
           title: "Settings",
         },
+        dashboard: {
+          title: "Dashboard",
+        },
+        offers: {
+          title: "Offers",
+        },
+        suppliers: {
+          title: "Suppliers",
+        },
+        accommodations: {
+          title: "Accommodations",
+        },
       },
     },
     dev: {

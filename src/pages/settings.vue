@@ -31,12 +31,12 @@ import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import { Card, FormalDropdown, Heading } from "webcc-ui-components";
-import Header from "@/header/Header";
+import Header from "@/header/Header.vue";
 
 import { useAppStore } from "~/stores/app";
 import { useThemeStore } from "~/stores/theme";
 
-const { t, setLocale } = useI18n();
+const { t } = useI18n();
 const appStore = useAppStore();
 const themeStore = useThemeStore();
 
@@ -99,6 +99,5 @@ const themeChanged = (theme: any) => {
  */
 const languageChanged = (language: string) => {
   appStore.setLanguage(language);
-  setLocale(language);
 };
 </script>

@@ -1,4 +1,4 @@
-@layer {
+@layer theme {
   :root.dark {
     /* Call to Action */
     --color-cta: 241 8 59;
@@ -298,6 +298,7 @@
 
     /* Misc. Colors */
     --color-offer: 150 111 78; /* Coffee Offer Brown */
+    --color-offer-contrast: 255 255 255; /* White for Contrast */
     --color-supplier: 134 94 66; /* Coffee Supplier Brown */
     --color-accommodation: 119 84 58; /* Coffee Accommodation Brown */
   }
