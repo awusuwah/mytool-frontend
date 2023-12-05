@@ -5,12 +5,24 @@
         <Icon graphic="mytool-icon" class="m-auto" :class="iconClasses" />
       </NuxtLink>
 
-      <div class="flex flex-col list-none md:mt-10 md:min-w-full">
-        <NavigationItem :label="t('pages.dashboard.title')" icon="bar-chart-grouped" to="/dashboard" />
+      <div class="flex flex-col text-txt-400 list-none md:mt-10 md:min-w-full">
+        <NavigationItem :label="t('pages.dashboard.title')" icon="bar-chart-grouped" to="/dashboard" class="mb-10" />
         <NavigationItem :label="t('pages.offers.title')" icon="file-text" to="/offers" />
         <NavigationItem :label="t('pages.suppliers.title')" icon="group" to="/suppliers" />
         <NavigationItem :label="t('pages.accommodations.title')" icon="home" to="/accommodations" />
-        <NavigationItem :label="t('pages.settings.title')" icon="settings" to="/settings" />
+      </div>
+
+      <div class="absolute left-2 bottom-1">
+        <ContextMenu ref="contextMenuRef" class="hidden md:block" :options="contextOptions" @click="contextOptionSelected">
+          <section v-if="authStore.getUser" class="flex items-center justify-start gap-2 px-2 py-3 bg-bgr-200">
+            <dl class="leading-none">
+              <dt class="text-txt-400 text-xs font-normal">
+                {{ t("components.navigation.contextMenu.loggedInAs") }}
+              </dt>
+              <dd>{{ authStore.getUser?.fullname || "Unknown User" }}</dd>
+            </dl>
+          </section>
+        </ContextMenu>
       </div>
 
       <Button
@@ -26,16 +38,22 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { Button, Icon } from "webcc-ui-components";
+import { Button, ContextMenu, Icon } from "webcc-ui-components";
 
 import NavigationItem from "@/navigation/NavigationItem.vue";
 
 import { useAppStore } from "~/stores/app";
+import { useAuthStore } from "~/stores/auth";
 
 const { t } = useI18n();
 const appStore = useAppStore();
+const authStore = useAuthStore();
+const router = useRouter();
+
+const contextMenuRef = ref<ContextMenuRefType | null>(null);
 
 // Determine if the sidebar is open
 const sidebarOpen = computed(() => appStore.sidebarOpen);
@@ -66,4 +84,74 @@ const iconClasses = computed(() => ({
   "w-20 h-20 mt-5": sidebarOpen.value,
   "w-14 h-14": !sidebarOpen.value,
 }));
+
+/**
+ * The options which are available in the context menu.
+ */
+const contextOptions = computed(() => {
+  const allOptions = [
+    {
+      label: t("components.navigation.contextMenu.options.settings"),
+      value: "settings",
+      prefixIcon: "settings",
+    },
+    {
+      label: t("components.navigation.contextMenu.options.login"),
+      value: "login",
+      prefixIcon: "login",
+    },
+    {
+      label: t("components.navigation.contextMenu.options.logout"),
+      value: "logout",
+      prefixIcon: "logout",
+    },
+  ];
+
+  // Remove the login / logout options depending on the user's authentication state
+  if (!authStore.getUser) {
+    return allOptions.filter((option) => option.value !== "logout");
+  } else {
+    return allOptions.filter((option) => option.value !== "login");
+  }
+});
+
+/**
+ * Handle when any context menu option is selected and act accordingly.
+ *
+ * @param { String } value - The value of the selected option.
+ */
+const contextOptionSelected = (value: string): void => {
+  if (contextMenuRef.value) {
+    contextMenuRef.value.selected = null;
+  }
+
+  switch (value) {
+    case "settings":
+      router.push("/settings");
+      break;
+
+    case "login":
+      router.push("/login");
+      break;
+
+    case "logout":
+      // TODO: Implement logout logic with the small microsoft online logout window
+      console.warn("Logout is not implemented yet! Nothing will happen :)");
+      break;
+
+    default:
+      console.info(`You have selected the option ${value} which is not fully implemented! Nothing will happen :)`);
+      break;
+  }
+};
+
+type ContextMenuRefType = {
+  selected: string | null;
+};
 </script>
+
+<style>
+.activator-icon-button > div {
+  right: -0.75rem;
+}
+</style>

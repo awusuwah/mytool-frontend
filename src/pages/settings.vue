@@ -3,7 +3,7 @@
     <Header :title="$t('pages.settings.title')" icon="settings" section="default" />
 
     <div class="p-4">
-      <Card class="space-y-4 border-none">
+      <Card class="space-y-4">
         <Heading appearance="title4" render-as="h2">
           {{ $t("components.appSettings.title") }}
         </Heading>

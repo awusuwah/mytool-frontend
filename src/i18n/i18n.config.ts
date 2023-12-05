@@ -25,6 +25,23 @@ export default {
             },
           },
         },
+
+        loginForm: {
+          title: "Login",
+          submit: "Login",
+        },
+
+        navigation: {
+          contextMenu: {
+            options: {
+              settings: "User & Settings",
+              login: "Login",
+              logout: "Logout",
+            },
+
+            loggedInAs: "Logged in as",
+          },
+        },
       },
       pages: {
         settings: {
@@ -42,28 +59,17 @@ export default {
         accommodations: {
           title: "Accommodations",
         },
-      },
-    },
-    dev: {
-      components: {
-        appSettings: {
-          title: "■■■ ■■■■■■■",
-
-          inputs: {
-            theme: {
-              label: "■■■■■■ ■■■■■",
-              options: {
-                light: "■■■■■",
-                dark: "■■■■",
-                coffee: "■■■■■■",
-              },
-            },
-          },
+        login: {
+          title: "Login (Developer Only)",
         },
       },
-      pages: {
-        settings: {
-          title: "■■■■■■■■",
+      inputs: {
+        email: {
+          label: "Email Address",
+        },
+        password: {
+          label: "Password",
+          placeholder: "********",
         },
       },
     },

@@ -11,7 +11,6 @@ export const syncLocalStorage = () => {
 
   // App Store
   const sidebarOpen = window.localStorage.getItem("sidebarOpen") === "false" ? false : true;
-  console.log("sidebarOpen", sidebarOpen);
   appStore.setSidebarOpen(sidebarOpen);
 
   // Theme Store

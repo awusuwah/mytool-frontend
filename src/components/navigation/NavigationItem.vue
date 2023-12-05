@@ -45,26 +45,15 @@ const props = defineProps({
  * Classes which are applied to the wrapper element.
  */
 const classes = computed(() => {
-  const path = route.path.slice(1);
+  const fullPath = route.fullPath;
 
   return {
     "items-center transition-colors w-full": true,
 
-    "bg-thm text-thm-contrast": path === "dashboard" && path.includes(props.to.slice(1)),
-    "bg-bgr text-txt-400 hover:text-thm hover:bg-bgr-50 hover:shadow-[inset_-2px_0_var(--color-thm)]":
-      path === "dashboard" && !path.includes(props.to.slice(1)),
-
-    "bg-offer text-txt": path === "offers" && path.includes(props.to.slice(1)),
-    "bg-bgr text-txt-400 hover:text-txt hover:bg-bgr-50 hover:shadow-[inset_-2px_0_var(--color-offer)]":
-      path === "offers" && !path.includes(props.to.slice(1)),
-
-    "bg-supplier text-txt": path === "suppliers" && path.includes(props.to.slice(1)),
-    "bg-bgr text-txt-400 hover:text-txt hover:bg-bgr-50 hover:shadow-[inset_-2px_0_var(--color-supplier)]":
-      path === "suppliers" && !path.includes(props.to.slice(1)),
-
-    "bg-accommodation text-txt": path === "accommodations" && path.includes(props.to.slice(1)),
-    "bg-bgr text-txt-400 hover:text-txt hover:bg-bgr-50 hover:shadow-[inset_-2px_0_var(--color-accommodation)]":
-      path === "accommodations" && !path.includes(props.to.slice(1)),
+    "bg-thm text-thm-contrast": props.to.slice(1) === "dashboard" && fullPath.includes(props.to),
+    "bg-offer text-thm-contrast": props.to.slice(1) === "offers" && fullPath.includes(props.to),
+    "bg-supplier text-thm-contrast": props.to.slice(1) === "suppliers" && fullPath.includes(props.to),
+    "bg-accommodation text-thm-contrast": props.to.slice(1) === "accommodations" && fullPath.includes(props.to),
   };
 });
 </script>
