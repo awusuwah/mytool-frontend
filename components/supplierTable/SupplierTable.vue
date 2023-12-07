@@ -20,13 +20,14 @@ const { t } = useI18n();
 const { $toast } = useNuxtApp();
 const api = useApi();
 const authStore = useAuthStore();
+const fetch = useRequestFetch();
 
 /**
  * Fetch the suppliers with the provided filters enabled.
  */
 const fetchSuppliers = async () => {
   try {
-    const suppliers = await api.get("/suppliers", { params: { brand: "I" } });
+    const suppliers = await fetch("/api/suppliers", { params: { brand: "I" } });
   } catch (error) {
     if (process.client) {
       $toast.error("Unable to fetch the suppliers");

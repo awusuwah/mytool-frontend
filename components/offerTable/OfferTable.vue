@@ -1,5 +1,5 @@
 <template>
-  <Table :data="offers" :columns="columns" :no-matches-found-text="t('components.offerTable.noOffersFound')">
+  <Table :data="[]" :columns="columns" :no-matches-found-text="t('components.offerTable.noOffersFound')">
     <template #toolbar>
       <div class="w-full flex justify-end">
         <Button variant="cta" :label="t('components.offerTable.createOffer')" />
@@ -65,13 +65,19 @@ const { t } = useI18n();
 const { $toast } = useNuxtApp();
 const api = useApi();
 const authStore = useAuthStore();
+const fetch = useRequestFetch();
 
 /**
  * Fetch the offers with the provided filters enabled
  */
 const fetchOffers = async () => {
   try {
-    const offers: OfferListResponse = await api.get("/offers", { params: { bo: "FR075" } });
+    const offers: OfferListResponse = await fetch("/api/offers", {
+      params: { bo: "FR075" },
+      headers: {
+        Authorization: `Bearer ${authStore.getAccessToken}`,
+      },
+    });
   } catch (error) {
     if (process.client) {
       $toast.error("Unable to fetch the offers");
@@ -79,94 +85,94 @@ const fetchOffers = async () => {
   }
 };
 
-// const offers = await fetchOffers();
+const offers = await fetchOffers();
 
-const offers = ref([
-  {
-    id: "DHAMdham",
-    status: "SENT",
-    supplier: {
-      code: "PFR10043",
-      label: "GUIRAUD Philip",
-    },
-    accom: {
-      code: "PFR6618.43",
-      label: "Le Fidji",
-    },
-    place: {
-      code: "06618",
-      label: "La Grande Motte",
-    },
-    country: "FR",
-    contractYears: [2024, 2025],
-    sendOutDate: "2023-11-21T08:51:41Z",
-    creationDate: "",
-    link: "",
-  },
-  {
-    id: "MHmZhFzQ",
-    status: "PENDING",
-    supplier: {
-      code: "PFR10044",
-      label: "Garcia olivier",
-    },
-    accom: {
-      code: "PFR6618.33",
-      label: "Le Birdy",
-    },
-    place: {
-      code: "06618",
-      label: "La Grande Motte",
-    },
-    country: "FR",
-    contractYears: [2024, 2025],
-    sendOutDate: "",
-    creationDate: "",
-    link: "",
-  },
-  {
-    id: "EeWHKwHh",
-    status: "REJECTED",
-    supplier: {
-      code: "PFR10060",
-      label: "FERRO Magali",
-    },
-    accom: {
-      code: "PFR6618.53",
-      label: "Marin'Land",
-    },
-    place: {
-      code: "06618",
-      label: "La Grande Motte",
-    },
-    country: "FR",
-    contractYears: [2024, 2025],
-    sendOutDate: "",
-    creationDate: "",
-    link: "",
-  },
-  {
-    id: "DdvVnNGg",
-    status: "PENDING",
-    supplier: {
-      code: "PFR10072",
-      label: "Adam Viviane \u0026 Jean Pierre",
-    },
-    accom: {
-      code: "PFR6618.63",
-      label: "Cap Sud",
-    },
-    place: {
-      code: "06618",
-      label: "La Grande Motte",
-    },
-    country: "FR",
-    contractYears: [2024, 2025],
-    sendOutDate: "",
-    creationDate: "",
-    link: "",
-  },
-]);
+// const offers = ref([
+//   {
+//     id: "DHAMdham",
+//     status: "SENT",
+//     supplier: {
+//       code: "PFR10043",
+//       label: "GUIRAUD Philip",
+//     },
+//     accom: {
+//       code: "PFR6618.43",
+//       label: "Le Fidji",
+//     },
+//     place: {
+//       code: "06618",
+//       label: "La Grande Motte",
+//     },
+//     country: "FR",
+//     contractYears: [2024, 2025],
+//     sendOutDate: "2023-11-21T08:51:41Z",
+//     creationDate: "",
+//     link: "",
+//   },
+//   {
+//     id: "MHmZhFzQ",
+//     status: "PENDING",
+//     supplier: {
+//       code: "PFR10044",
+//       label: "Garcia olivier",
+//     },
+//     accom: {
+//       code: "PFR6618.33",
+//       label: "Le Birdy",
+//     },
+//     place: {
+//       code: "06618",
+//       label: "La Grande Motte",
+//     },
+//     country: "FR",
+//     contractYears: [2024, 2025],
+//     sendOutDate: "",
+//     creationDate: "",
+//     link: "",
+//   },
+//   {
+//     id: "EeWHKwHh",
+//     status: "REJECTED",
+//     supplier: {
+//       code: "PFR10060",
+//       label: "FERRO Magali",
+//     },
+//     accom: {
+//       code: "PFR6618.53",
+//       label: "Marin'Land",
+//     },
+//     place: {
+//       code: "06618",
+//       label: "La Grande Motte",
+//     },
+//     country: "FR",
+//     contractYears: [2024, 2025],
+//     sendOutDate: "",
+//     creationDate: "",
+//     link: "",
+//   },
+//   {
+//     id: "DdvVnNGg",
+//     status: "PENDING",
+//     supplier: {
+//       code: "PFR10072",
+//       label: "Adam Viviane \u0026 Jean Pierre",
+//     },
+//     accom: {
+//       code: "PFR6618.63",
+//       label: "Cap Sud",
+//     },
+//     place: {
+//       code: "06618",
+//       label: "La Grande Motte",
+//     },
+//     country: "FR",
+//     contractYears: [2024, 2025],
+//     sendOutDate: "",
+//     creationDate: "",
+//     link: "",
+//   },
+// ]);
 
 /**
  * Columns which are displayed in the table.
