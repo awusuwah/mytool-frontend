@@ -6,25 +6,25 @@ import { defineStore } from "pinia";
  */
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    accessToken: null,
-    user: null,
+    accessToken: null as string | null,
+    user: null as User | null,
   }),
   getters: {
     /**
      * Get the authenticated user's access token.
      *
-     * @returns { Boolean } Returns the user's access token, or null.
+     * @returns { String | null } Returns the user's access token, or null.
      */
-    getAccessToken(): boolean {
+    getAccessToken(): string | null {
       return this.accessToken;
     },
 
     /**
      * Get the authenticated user's data.
      *
-     * @returns { Object } Returns the user's data, or null.
+     * @returns { User | null } Returns the user's data, or null.
      */
-    getUser(): User {
+    getUser(): User | null {
       return this.user;
     },
 
@@ -33,16 +33,16 @@ export const useAuthStore = defineStore("auth", {
      *
      * @returns { UserBuyingOffice[] } Returns the user's buying offices, or null.
      */
-    getUserBuyingOffices(): UserBuyingOffice[] {
+    getUserBuyingOffices(): UserBuyingOffice[] | null {
       return this.user?.buyingOffices ?? null;
     },
 
     /**
      * Get the authenticated user's country. It takes the value from the first buying office.
      *
-     * @returns { String } Returns the user's country, or null.
+     * @returns { String | null } Returns the user's country, or null.
      */
-    getUserCountry(): string {
+    getUserCountry(): string | null {
       return this.user?.buyingOffices[0].country ?? null;
     },
   },
@@ -52,8 +52,15 @@ export const useAuthStore = defineStore("auth", {
      *
      * @param { String } accessToken - The access token for the authenticated user.
      */
-    setAccessToken(accessToken: string): void {
+    setAccessToken(accessToken: string | null): void {
       this.accessToken = accessToken;
+
+      if (accessToken) {
+        window.localStorage.setItem("accessToken", accessToken);
+        return;
+      }
+
+      window.localStorage.removeItem("accessToken");
     },
 
     /**
@@ -61,8 +68,14 @@ export const useAuthStore = defineStore("auth", {
      *
      * @param { User } user - The data for the authenticated user.
      */
-    setUser(user: User): void {
+    setUser(user: User | null): void {
       this.user = user;
+      if (user) {
+        window.localStorage.setItem("user", JSON.stringify(user));
+        return;
+      }
+
+      window.localStorage.removeItem("user");
     },
   },
 });

@@ -3,6 +3,11 @@
     <nav :class="navClasses">
       <NuxtLink to="/" class="text-sm font-bold">
         <Icon graphic="mytool-icon" class="m-auto" :class="iconClasses" />
+
+        <div class="text-thm text-center m-auto">
+          <Badge variant="warning">{{ $config.public.envName }}</Badge>
+          <!-- <span v-for="letter in $config.public.envName.split('')">{{ letter }}</span> -->
+        </div>
       </NuxtLink>
 
       <div class="flex flex-col text-txt-400 list-none md:mt-32 md:min-w-full">
@@ -41,7 +46,7 @@
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { Button, ContextMenu, Icon } from "webcc-ui-components";
+import { Badge, Button, ContextMenu, Icon } from "webcc-ui-components";
 
 import NavigationItem from "@/navigation/NavigationItem.vue";
 
@@ -49,6 +54,7 @@ import { useAppStore } from "~/stores/app";
 import { useAuthStore } from "~/stores/auth";
 
 const { t } = useI18n();
+const { $toast } = useNuxtApp();
 const router = useRouter();
 const appStore = useAppStore();
 const authStore = useAuthStore();
@@ -136,7 +142,10 @@ const contextOptionSelected = (value: string): void => {
 
     case "logout":
       // TODO: Implement logout logic with the small microsoft online logout window
-      console.warn("Logout is not implemented yet! Nothing will happen :)");
+      console.warn("Logout is only implemented for local development, no cookies are being deleted!");
+      authStore.setAccessToken(null);
+      authStore.setUser(null);
+      $toast.success(t("components.navigation.contextMenu.toasts.logoutSuccess"));
       break;
 
     default:

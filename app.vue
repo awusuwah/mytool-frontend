@@ -1,7 +1,9 @@
 <template>
   <div class="text-txt">
     <NuxtLayout>
-      <NuxtPage />
+      <ClientOnly>
+        <NuxtPage />
+      </ClientOnly>
     </NuxtLayout>
 
     <AllIcons />
@@ -9,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeMount } from "vue";
+import { computed } from "vue";
 import { AllIcons } from "webcc-ui-components";
 
 import { useThemeStore } from "~/stores/theme";
@@ -27,7 +29,7 @@ useHead({
   },
 });
 
-onBeforeMount(() => {
+onMounted(() => {
   syncLocalStorage();
 
   // Check if the user has a previously selected theme

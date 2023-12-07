@@ -5,12 +5,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   ssr: true,
-  srcDir: "src",
 
   // Alias
   alias: {
-    "~": resolve(__dirname, "./src"),
-    "@": resolve(__dirname, "./src/components"),
+    "~": resolve(__dirname, "./"),
+    "@": resolve(__dirname, "./components/"),
   },
 
   css: ["~/assets/tailwind.css"],
@@ -36,6 +35,7 @@ export default defineNuxtConfig({
     public: {
       apiBaseUrl: process.env.API_BASE_URL || "NO_API_BASE_URL_SET",
       oauthSecret: process.env.OAUTH_CLIENT_SECRET || "NO_SECRET_SET",
+      envName: process.env.ENV_NAME || "",
     },
   },
 });

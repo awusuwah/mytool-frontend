@@ -1,9 +1,0 @@
-<template>
-  <div class="flex flex-col">
-    <Header :title="$t('pages.suppliers.title')" icon="group" section="suppliers" />
-  </div>
-</template>
-
-<script setup lang="ts">
-import Header from "@/header/Header.vue";
-</script>

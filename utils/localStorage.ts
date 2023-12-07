@@ -1,4 +1,5 @@
 import { useAppStore } from "~/stores/app";
+import { useAuthStore } from "~/stores/auth";
 import { useThemeStore } from "~/stores/theme";
 
 /**
@@ -7,6 +8,7 @@ import { useThemeStore } from "~/stores/theme";
  */
 export const syncLocalStorage = () => {
   const appStore = useAppStore();
+  const authStore = useAuthStore();
   const themeStore = useThemeStore();
 
   // App Store
@@ -16,4 +18,10 @@ export const syncLocalStorage = () => {
   // Theme Store
   const theme = window.localStorage.getItem("theme") || "";
   themeStore.setTheme(theme);
+
+  // Auth Store
+  const accessToken = window.localStorage.getItem("accessToken") || null;
+  const user: any = window.localStorage.getItem("user") || null;
+  authStore.setAccessToken(accessToken);
+  authStore.setUser(JSON.parse(user));
 };
