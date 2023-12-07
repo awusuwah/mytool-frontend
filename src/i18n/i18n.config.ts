@@ -35,7 +35,7 @@ export default {
           contextMenu: {
             options: {
               settings: "User & Settings",
-              login: "Login",
+              login: "Developer Login",
               logout: "Logout",
             },
 
@@ -60,7 +60,7 @@ export default {
           title: "Accommodations",
         },
         login: {
-          title: "Login (Developer Only)",
+          title: "Developer Login",
         },
       },
       inputs: {

@@ -5,7 +5,7 @@
         <Icon graphic="mytool-icon" class="m-auto" :class="iconClasses" />
       </NuxtLink>
 
-      <div class="flex flex-col text-txt-400 list-none md:mt-10 md:min-w-full">
+      <div class="flex flex-col text-txt-400 list-none md:mt-32 md:min-w-full">
         <NavigationItem :label="t('pages.dashboard.title')" icon="bar-chart-grouped" to="/dashboard" class="mb-10" />
         <NavigationItem :label="t('pages.offers.title')" icon="file-text" to="/offers" />
         <NavigationItem :label="t('pages.suppliers.title')" icon="group" to="/suppliers" />
@@ -49,9 +49,9 @@ import { useAppStore } from "~/stores/app";
 import { useAuthStore } from "~/stores/auth";
 
 const { t } = useI18n();
+const router = useRouter();
 const appStore = useAppStore();
 const authStore = useAuthStore();
-const router = useRouter();
 
 const contextMenuRef = ref<ContextMenuRefType | null>(null);
 
