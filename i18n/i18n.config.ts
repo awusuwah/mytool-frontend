@@ -122,6 +122,9 @@ export default {
         login: {
           title: "Developer Login",
         },
+        offerDetail: {
+          title: "Offer for {internalName}",
+        },
       },
       inputs: {
         email: {

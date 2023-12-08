@@ -1,17 +1,18 @@
 <template>
-  <Table :data="[]" :columns="columns" :no-matches-found-text="t('components.offerTable.noOffersFound')">
+  <Table :data="offers ?? []" :columns="columns" :no-matches-found-text="t('components.offerTable.noOffersFound')">
     <template #toolbar>
       <div class="w-full flex justify-end">
-        <Button variant="cta" :label="t('components.offerTable.createOffer')" />
+        <Button variant="cta" :label="t('components.offerTable.createOffer')" @click="navigateTo('/offers/create/')" />
       </div>
     </template>
 
-    <template #tbody="{ filteredData }">
+    <template v-if="!isLoading" #tbody="{ filteredData }">
       <TableRow
         v-for="(offer, index) in filteredData"
         :entry="offer"
         :columns="columns"
         class="cursor-pointer"
+        hoverable
         @click="navigateTo(`/offers/${offer.id}/`)"
       >
         <template #supplier>
@@ -49,6 +50,20 @@
         </template>
       </TableRow>
     </template>
+
+    <template v-if="isLoading" #tfoot>
+      <tfoot class="bg-bgr">
+        <tr v-for="i in 10" :key="i" class="h-16">
+          <td colspan="9" class="px-4 py-2">
+            <div class="w-full h-9 bg-bgr-700 animate-pulse rounded-md"></div>
+          </td>
+        </tr>
+      </tfoot>
+    </template>
+
+    <template v-if="isLoading" #nofound>
+      <div></div>
+    </template>
   </Table>
 </template>
 
@@ -58,121 +73,11 @@ import { useI18n } from "vue-i18n";
 import { Button, IconButton, Table, TableRow, Tooltip } from "webcc-ui-components";
 
 import CodeNameDisplay from "@/codeNameDisplay/CodeNameDisplay.vue";
-import useApi from "~/composables/useApi";
-import { useAuthStore } from "~/stores/auth";
 
 const { t } = useI18n();
-const { $toast } = useNuxtApp();
-const api = useApi();
-const authStore = useAuthStore();
-const fetch = useRequestFetch();
 
-/**
- * Fetch the offers with the provided filters enabled
- */
-const fetchOffers = async () => {
-  try {
-    const offers: OfferListResponse = await fetch("/api/offers", {
-      params: { bo: "FR075" },
-      headers: {
-        Authorization: `Bearer ${authStore.getAccessToken}`,
-      },
-    });
-  } catch (error) {
-    if (process.client) {
-      $toast.error("Unable to fetch the offers");
-    }
-  }
-};
-
-const offers = await fetchOffers();
-
-// const offers = ref([
-//   {
-//     id: "DHAMdham",
-//     status: "SENT",
-//     supplier: {
-//       code: "PFR10043",
-//       label: "GUIRAUD Philip",
-//     },
-//     accom: {
-//       code: "PFR6618.43",
-//       label: "Le Fidji",
-//     },
-//     place: {
-//       code: "06618",
-//       label: "La Grande Motte",
-//     },
-//     country: "FR",
-//     contractYears: [2024, 2025],
-//     sendOutDate: "2023-11-21T08:51:41Z",
-//     creationDate: "",
-//     link: "",
-//   },
-//   {
-//     id: "MHmZhFzQ",
-//     status: "PENDING",
-//     supplier: {
-//       code: "PFR10044",
-//       label: "Garcia olivier",
-//     },
-//     accom: {
-//       code: "PFR6618.33",
-//       label: "Le Birdy",
-//     },
-//     place: {
-//       code: "06618",
-//       label: "La Grande Motte",
-//     },
-//     country: "FR",
-//     contractYears: [2024, 2025],
-//     sendOutDate: "",
-//     creationDate: "",
-//     link: "",
-//   },
-//   {
-//     id: "EeWHKwHh",
-//     status: "REJECTED",
-//     supplier: {
-//       code: "PFR10060",
-//       label: "FERRO Magali",
-//     },
-//     accom: {
-//       code: "PFR6618.53",
-//       label: "Marin'Land",
-//     },
-//     place: {
-//       code: "06618",
-//       label: "La Grande Motte",
-//     },
-//     country: "FR",
-//     contractYears: [2024, 2025],
-//     sendOutDate: "",
-//     creationDate: "",
-//     link: "",
-//   },
-//   {
-//     id: "DdvVnNGg",
-//     status: "PENDING",
-//     supplier: {
-//       code: "PFR10072",
-//       label: "Adam Viviane \u0026 Jean Pierre",
-//     },
-//     accom: {
-//       code: "PFR6618.63",
-//       label: "Cap Sud",
-//     },
-//     place: {
-//       code: "06618",
-//       label: "La Grande Motte",
-//     },
-//     country: "FR",
-//     contractYears: [2024, 2025],
-//     sendOutDate: "",
-//     creationDate: "",
-//     link: "",
-//   },
-// ]);
+const offers = ref<OfferListResponse>([]);
+const isLoading = ref(false);
 
 /**
  * Columns which are displayed in the table.
@@ -187,4 +92,17 @@ const columns = computed(() => [
   { key: "document", label: t("components.offerTable.table.document"), responsive: "xl" },
   { key: "actions", label: t("components.offerTable.table.actions") },
 ]);
+
+/**
+ * Fetch the offers from the API and manage the loading state.
+ */
+const fetchOffers = async () => {
+  isLoading.value = true;
+  offers.value = (await useOfferList({ bo: "FR075" })) ?? [];
+  isLoading.value = false;
+};
+
+onBeforeMount(async () => {
+  await fetchOffers();
+});
 </script>

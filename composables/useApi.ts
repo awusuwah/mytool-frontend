@@ -1,10 +1,7 @@
 import axios from "axios";
 
-import { useAuthStore } from "~/stores/auth";
-
 export default function useApi() {
   const { $config } = useNuxtApp();
-  const authStore = useAuthStore();
 
   const api = axios.create({
     baseURL: `${$config.public.apiBaseUrl}/webcc-api/v1/easy2use`,

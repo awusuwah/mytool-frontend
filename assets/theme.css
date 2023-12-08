@@ -302,4 +302,206 @@
     --color-supplier: 134 94 66; /* Coffee Supplier Brown */
     --color-accommodation: 119 84 58; /* Coffee Accommodation Brown */
   }
+
+  :root.sage {
+    /* Call to Action */
+    --color-cta: 128 160 95;
+    --color-cta-hover: 116 148 83;
+    --color-cta-active: 104 136 71;
+    --color-cta-contrast: 255 255 255;
+
+    --color-cta-light: 200 224 187;
+    --color-cta-light-hover: 185 209 172;
+    --color-cta-light-active: 170 194 157;
+    --color-cta-light-contrast: 128 160 95;
+
+    /* Theme */
+    --color-thm: 90 107 61;
+    --color-thm-hover: 81 96 55;
+    --color-thm-active: 72 85 49;
+    --color-thm-contrast: 255 255 255;
+
+    --color-thm-light: 160 177 131;
+    --color-thm-light-hover: 145 162 116;
+    --color-thm-light-active: 130 147 101;
+    --color-thm-light-contrast: 90 107 61;
+
+    /* Highlight */
+    --color-hlt: 100 127 75;
+    --color-hlt-hover: 90 114 67;
+    --color-hlt-active: 80 101 59;
+    --color-hlt-contrast: 255 255 255;
+
+    --color-hlt-light: 170 197 145;
+    --color-hlt-light-hover: 155 182 130;
+    --color-hlt-light-active: 140 167 115;
+    --color-hlt-light-contrast: 100 127 75;
+
+    /* Functional: Success */
+    --color-suc: 102 180 120;
+    --color-suc-hover: 92 162 108;
+    --color-suc-active: 82 144 96;
+    --color-suc-contrast: 255 255 255;
+    --color-suc-light: 182 230 190;
+    --color-suc-text: 102 180 120;
+
+    /* Functional: Danger */
+    --color-err: 135 85 80;
+    --color-err-hover: 121 76 71;
+    --color-err-active: 107 67 62;
+    --color-err-contrast: 255 255 255;
+    --color-err-light: 202 152 147;
+    --color-err-text: 135 85 80;
+
+    /* Functional: Warning */
+    --color-wrn: 204 136 76;
+    --color-wrn-hover: 184 122 68;
+    --color-wrn-active: 164 108 60;
+    --color-wrn-contrast: 255 255 255;
+    --color-wrn-light: 234 186 146;
+    --color-wrn-text: 204 136 76;
+
+    /* Functional: Info */
+    --color-inf: 85 123 153;
+    --color-inf-hover: 76 110 137;
+    --color-inf-active: 67 97 121;
+    --color-inf-contrast: 255 255 255;
+    --color-inf-light: 155 193 223;
+    --color-inf-text: 85 123 153;
+
+    /* Background */
+    --color-bgr: 28 33 29;
+    --color-bgr100: 41 47 42;
+    --color-bgr200: 54 60 55;
+    --color-bgr300: 67 74 69;
+    --color-bgr400: 80 87 82;
+    --color-bgr500: 93 100 95;
+    --color-bgr600: 106 113 108;
+    --color-bgr700: 119 126 121;
+    --color-bgr800: 132 139 134;
+    --color-bgr900: 145 152 147;
+
+    /* Text & Link */
+    --color-txt: 210 215 210;
+    --color-txt100: 197 202 197;
+    --color-txt200: 184 189 184;
+    --color-txt300: 171 176 171;
+    --color-txt400: 158 163 158;
+    --color-txt500: 145 150 145;
+    --color-txt600: 132 137 132;
+    --color-txt700: 119 124 119;
+    --color-txt800: 106 111 106;
+    --color-txt900: 93 98 93;
+
+    --color-txt-link: 128 160 95;
+    --color-txt-link-hover: 116 148 83;
+    --color-txt-link-active: 104 136 71;
+    --color-txt-link-contrast: 255 255 255;
+
+    /* Misc. Colors */
+    --color-offer: 105 118 79;
+    --color-supplier: 114 128 86;
+    --color-accommodation: 99 111 74;
+  }
+
+  :root.monochrome {
+    /* Call to Action */
+    --color-cta: 220 220 220; /* Very Light Gray */
+    --color-cta-hover: 200 200 200; /* Light Gray */
+    --color-cta-active: 180 180 180; /* Medium Light Gray */
+    --color-cta-contrast: 15 15 15; /* Almost Black */
+
+    --color-cta-light: 240 240 240; /* Near White */
+    --color-cta-light-hover: 230 230 230;
+    --color-cta-light-active: 210 210 210;
+    --color-cta-light-contrast: 20 20 20;
+
+    /* Theme */
+    --color-thm: 215 215 215; /* Very Light Gray */
+    --color-thm-hover: 195 195 195;
+    --color-thm-active: 175 175 175;
+    --color-thm-contrast: 15 15 15;
+
+    --color-thm-light: 235 235 235;
+    --color-thm-light-hover: 225 225 225;
+    --color-thm-light-active: 205 205 205;
+    --color-thm-light-contrast: 20 20 20;
+
+    /* Highlight */
+    --color-hlt: 210 210 210; /* Light Gray */
+    --color-hlt-hover: 190 190 190;
+    --color-hlt-active: 170 170 170;
+    --color-hlt-contrast: 15 15 15;
+
+    --color-hlt-light: 230 230 230;
+    --color-hlt-light-hover: 220 220 220;
+    --color-hlt-light-active: 200 200 200;
+    --color-hlt-light-contrast: 20 20 20;
+
+    /* Functional: Success */
+    --color-suc: 205 205 205; /* Light Gray */
+    --color-suc-hover: 185 185 185;
+    --color-suc-active: 165 165 165;
+    --color-suc-contrast: 15 15 15;
+    --color-suc-light: 225 225 225;
+    --color-suc-text: 205 205 205;
+
+    /* Functional: Danger */
+    --color-err: 195 195 195;
+    --color-err-hover: 175 175 175;
+    --color-err-active: 155 155 155;
+    --color-err-contrast: 15 15 15;
+    --color-err-light: 215 215 215;
+    --color-err-text: 195 195 195;
+
+    /* Functional: Warning */
+    --color-wrn: 185 185 185;
+    --color-wrn-hover: 165 165 165;
+    --color-wrn-active: 145 145 145;
+    --color-wrn-contrast: 15 15 15;
+    --color-wrn-light: 205 205 205;
+    --color-wrn-text: 185 185 185;
+
+    /* Functional: Info */
+    --color-inf: 175 175 175;
+    --color-inf-hover: 155 155 155;
+    --color-inf-active: 135 135 135;
+    --color-inf-contrast: 15 15 15;
+    --color-inf-light: 195 195 195;
+    --color-inf-text: 175 175 175;
+
+    /* Background */
+    --color-bgr: 10 10 10; /* Almost Black */
+    --color-bgr100: 20 20 20;
+    --color-bgr200: 30 30 30;
+    --color-bgr300: 40 40 40;
+    --color-bgr400: 50 50 50;
+    --color-bgr500: 60 60 60;
+    --color-bgr600: 70 70 70;
+    --color-bgr700: 80 80 80;
+    --color-bgr800: 90 90 90;
+    --color-bgr900: 100 100 100;
+
+    /* Text & Link */
+    --color-txt: 230 230 230; /* Near White */
+    --color-txt100: 220 220 220;
+    --color-txt200: 210 210 210;
+    --color-txt300: 200 200 200;
+    --color-txt400: 190 190 190;
+    --color-txt500: 180 180 180;
+    --color-txt600: 170 170 170;
+    --color-txt700: 160 160 160;
+    --color-txt800: 150 150 150;
+    --color-txt900: 140 140 140;
+
+    --color-txt-link: 220 220 220;
+    --color-txt-link-hover: 200 200 200;
+    --color-txt-link-active: 180 180 180;
+    --color-txt-link-contrast: 20 20 20;
+
+    /* Misc. Colors */
+    --color-offer: 160 160 160;
+    --color-supplier: 170 170 170;
+    --color-accommodation: 180 180 180;
+  }
 }

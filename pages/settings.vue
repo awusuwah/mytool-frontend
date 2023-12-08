@@ -67,6 +67,16 @@ const themeOptions = computed(() => [
     value: "coffee",
     prefixIcon: "star",
   },
+  {
+    label: "Sage",
+    value: "sage",
+    prefixIcon: "star",
+  },
+  {
+    label: "Monochrome",
+    value: "monochrome",
+    prefixIcon: "star",
+  },
 ]);
 
 /**
