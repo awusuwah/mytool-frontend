@@ -165,179 +165,179 @@ type State = {
   };
 };
 
-export type Offer = {
-  offerID: string;
-  state: string;
-  lastModified: string;
+// export type Offer = {
+//   offerID: string;
+//   state: string;
+//   lastModified: string;
 
-  // Relations
-  supplier: Supplier;
-  buyingoffice: ValueLabel;
-  purchaser: ValueLabel;
+//   // Relations
+//   supplier: Supplier;
+//   buyingoffice: ValueLabel;
+//   purchaser: ValueLabel;
 
-  accommodation: OfferPartialAccommodation;
-  fullAccommodation: OfferFullAccommodation;
+//   accommodation: OfferPartialAccommodation;
+//   fullAccommodation: OfferFullAccommodation;
 
-  attributes: any;
-  attrExt: any;
+//   attributes: any;
+//   attrExt: any;
 
-  contract: OfferContract;
-  documents: OfferDocument[];
+//   contract: OfferContract;
+//   documents: OfferDocument[];
 
-  prices: OfferPrice[];
-  pricesFrom: string;
-  turnovers: OfferTurnover[];
+//   prices: OfferPrice[];
+//   pricesFrom: string;
+//   turnovers: OfferTurnover[];
 
-  services: OfferService[];
-};
+//   services: OfferService[];
+// };
 
-export type OfferPartialAccommodation = {
-  code: string;
-  type: ValueLabel;
-  name: string;
+// export type OfferPartialAccommodation = {
+//   code: string;
+//   type: ValueLabel;
+//   name: string;
 
-  country: CodeName;
-  region: CodeName;
-  place: CodeName;
-  newPlaceName: string;
+//   country: CodeName;
+//   region: CodeName;
+//   place: CodeName;
+//   newPlaceName: string;
 
-  pax: number;
-  rooms: number;
-  bedrooms: number;
-};
+//   pax: number;
+//   rooms: number;
+//   bedrooms: number;
+// };
 
-export type OfferFullAccommodation = {
-  code: string;
-  brand: string;
-  name: string;
-  pseudo: boolean;
-  type: string;
+// export type OfferFullAccommodation = {
+//   code: string;
+//   brand: string;
+//   name: string;
+//   pseudo: boolean;
+//   type: string;
 
-  country: string;
-  region: number;
-  place: number;
-  placeName: string;
+//   country: string;
+//   region: number;
+//   place: number;
+//   placeName: string;
 
-  address: {
-    firstname: string;
-    lastname: string;
+//   address: {
+//     firstname: string;
+//     lastname: string;
 
-    country: string;
-    place: string;
-    zip: string;
+//     country: string;
+//     place: string;
+//     zip: string;
 
-    streetAndNumber: string;
-    addressline1: string;
-    addressline2: string;
-  };
+//     streetAndNumber: string;
+//     addressline1: string;
+//     addressline2: string;
+//   };
 
-  coordinates: {
-    latitude: number;
-    longitude: number;
-  };
+//   coordinates: {
+//     latitude: number;
+//     longitude: number;
+//   };
 
-  attributes: any;
+//   attributes: any;
 
-  pax: number;
-  rooms: number;
-  bedrooms: number;
-};
+//   pax: number;
+//   rooms: number;
+//   bedrooms: number;
+// };
 
-export type Supplier = {
-  address: {
-    firstname: string;
-    lastname: string;
-    salutation: string;
+// export type Supplier = {
+//   address: {
+//     firstname: string;
+//     lastname: string;
+//     salutation: string;
 
-    country: string;
-    streetAndNumber: string;
-    zip: string;
-    place: string;
-  };
+//     country: string;
+//     streetAndNumber: string;
+//     zip: string;
+//     place: string;
+//   };
 
-  arrivalTime: string;
-  brand: string;
-  buyingOffice: number;
+//   arrivalTime: string;
+//   brand: string;
+//   buyingOffice: number;
 
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
-  country: string;
-  id: string;
-  number: number;
-  isPseudo: boolean;
-  keyObject: boolean;
-  legal: number;
-  paymentPeriod: string;
-  proprietorStatus: number;
-  taxnumber: string;
+//   coordinates: {
+//     lat: number;
+//     lng: number;
+//   };
+//   country: string;
+//   id: string;
+//   number: number;
+//   isPseudo: boolean;
+//   keyObject: boolean;
+//   legal: number;
+//   paymentPeriod: string;
+//   proprietorStatus: number;
+//   taxnumber: string;
 
-  emails: SupplierContact[];
-  phoneNumbers: SupplierContact[];
-  languages: string[];
-};
+//   emails: SupplierContact[];
+//   phoneNumbers: SupplierContact[];
+//   languages: string[];
+// };
 
-export type SupplierContact = {
-  main: boolean;
-  type: string;
-  data: string;
-  country: string;
-};
+// export type SupplierContact = {
+//   main: boolean;
+//   type: string;
+//   data: string;
+//   country: string;
+// };
 
-export type OfferContract = {
-  calculationClass: ValueLabel;
-  gerance: number;
-  length: number;
-  margin: number;
-  seasonmodel: ValueLabel;
-  start: string;
-  type: ValueLabel;
-};
+// export type OfferContract = {
+//   calculationClass: ValueLabel;
+//   gerance: number;
+//   length: number;
+//   margin: number;
+//   seasonmodel: ValueLabel;
+//   start: string;
+//   type: ValueLabel;
+// };
 
-export type OfferDocument = {
-  createdOn: string;
-  creator: string;
-  id: string;
-  isLSOVersion: boolean;
-  isPreview: boolean;
-  link: string;
-  state: string;
-  substype: "offer_create" | "offer_send";
-  type: string;
-};
+// export type OfferDocument = {
+//   createdOn: string;
+//   creator: string;
+//   id: string;
+//   isLSOVersion: boolean;
+//   isPreview: boolean;
+//   link: string;
+//   state: string;
+//   substype: "offer_create" | "offer_send";
+//   type: string;
+// };
 
-export type OfferPrice = {
-  currency: string;
-  from: string;
-  to: string;
-  margin: number;
-  period: number;
-  season: string;
-  year: number;
+// export type OfferPrice = {
+//   currency: string;
+//   from: string;
+//   to: string;
+//   margin: number;
+//   period: number;
+//   season: string;
+//   year: number;
 
-  purchase: DailyWeekly;
-  purchaseSmart: DailyWeekly;
-  sales: DailyWeekly;
-  salesSmart: DailyWeekly;
-};
+//   purchase: DailyWeekly;
+//   purchaseSmart: DailyWeekly;
+//   sales: DailyWeekly;
+//   salesSmart: DailyWeekly;
+// };
 
-export type OfferTurnover = {
-  category: string;
-  days: number;
-  purchase: string;
-  purchaseNet: string;
-  sales: string;
-  year: number;
-};
+// export type OfferTurnover = {
+//   category: string;
+//   days: number;
+//   purchase: string;
+//   purchaseNet: string;
+//   sales: string;
+//   year: number;
+// };
 
-export type OfferService = {
-  code: string;
-  defaultText: string;
-  serviceText: string;
-  text: string;
-  suggestions: string[];
-};
+// export type OfferService = {
+//   code: string;
+//   defaultText: string;
+//   serviceText: string;
+//   text: string;
+//   suggestions: string[];
+// };
 
 /**
  * Partial data of an offer. This is all the data which is needed to display an offer in the `recent` list.

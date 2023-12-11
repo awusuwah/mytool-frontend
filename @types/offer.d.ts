@@ -76,6 +76,7 @@ type OfferFullAccommodation = {
 type OfferContract = {
   type: ValueLabel;
   start: string;
+  end: string;
   seasonmodel: ValueLabel;
   calculationClass: ValueLabel;
   gerance: number;

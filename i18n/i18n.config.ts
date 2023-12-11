@@ -66,6 +66,56 @@ export default {
           },
         },
 
+        accommodationCard: {
+          title: "Accommodation",
+
+          labels: {
+            internalName: "Internal Name",
+            accoCode: "Accommodation Code",
+            accoType: "Accommodation Type",
+
+            location: "Location",
+            postalAddress: "Postal Address",
+
+            pax: "Pax",
+            rooms: "Rooms",
+            bedrooms: "Bedrooms",
+          },
+
+          editModal: {
+            title: 'Edit Accommodation "{internalName}"',
+          },
+        },
+
+        conditionsCard: {
+          title: "Conditions",
+
+          labels: {
+            contractYears: "Contract Years",
+            contractType: "Contract Type",
+
+            startDate: "Start Date",
+            endDate: "End Date",
+
+            seasonModel: "Season Model",
+            calculationClass: "Calculation Class",
+          },
+        },
+
+        relationsCard: {
+          title: "Relations",
+
+          labels: {
+            supplier: "Supplier",
+            purchaser: "Purchaser",
+            buyingOffice: "Buying Office",
+          },
+
+          editModal: {
+            title: "Edit Relations",
+          },
+        },
+
         offerTable: {
           createOffer: "Create Offer",
           noOffersFound: "No offers found!",
@@ -134,6 +184,10 @@ export default {
           label: "Password",
           placeholder: "********",
         },
+      },
+      buttons: {
+        cancel: "Cancel",
+        save: "Save Changes",
       },
     },
   },

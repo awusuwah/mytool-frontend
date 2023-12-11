@@ -13,4 +13,8 @@
     background-image: url("~/assets/images/texture.png");
     background-repeat: repeat;
   }
+
+  .skeleton {
+    @apply h-4 w-full rounded bg-bgr-400 animate-pulse;
+  }
 }

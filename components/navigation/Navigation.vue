@@ -6,7 +6,6 @@
 
         <div class="text-thm text-center m-auto">
           <Badge variant="warning">{{ $config.public.envName }}</Badge>
-          <!-- <span v-for="letter in $config.public.envName.split('')">{{ letter }}</span> -->
         </div>
       </NuxtLink>
 
