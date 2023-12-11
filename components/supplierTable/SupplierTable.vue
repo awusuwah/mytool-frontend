@@ -13,7 +13,7 @@
         :columns="columns"
         class="cursor-pointer"
         hoverable
-        @click="navigateTo(`/suppliers/${supplier.id}/`)"
+        @click="navigateTo(`/suppliers/${supplier.id}`)"
       >
         <template #fullname>
           <CodeNameDisplay icon="user" :name="`${supplier.firstname} ${supplier.lastname}`" :code="supplier.id" />

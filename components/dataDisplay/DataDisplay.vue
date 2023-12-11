@@ -18,7 +18,7 @@ defineProps({
   // The label of the data display.
   label: {
     type: String,
-    required: true,
+    default: null,
   },
 
   // The value of the data display.

@@ -132,6 +132,14 @@ export default {
         },
         supplier: "rgb(var(--color-supplier) / <alpha-value>)",
         accommodation: "rgb(var(--color-accommodation) / <alpha-value>)",
+
+        season: {
+          low: "rgb(var(--color-season-low) / <alpha-value>)",
+          mid: "rgb(var(--color-season-mid) / <alpha-value>)",
+          upperMid: "rgb(var(--color-season-upperMid) / <alpha-value>)",
+          high: "rgb(var(--color-season-high) / <alpha-value>)",
+          superHigh: "rgb(var(--color-season-superHigh) / <alpha-value>)",
+        },
       },
     },
   },

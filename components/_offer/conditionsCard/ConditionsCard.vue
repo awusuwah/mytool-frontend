@@ -1,4 +1,3 @@
-import type { OfferConditionsConditionsCard } from '#build/components';
 <template>
   <Card class="flex flex-col gap-y-2">
     <Heading appearance="title4" render-as="h3"> {{ t("components.conditionsCard.title") }} </Heading>

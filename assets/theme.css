@@ -98,6 +98,12 @@
     --color-offer: 13 135 112;
     --color-supplier: 8 86 172;
     --color-accommodation: 7 59 116;
+
+    --color-season-low: 0 58 143;
+    --color-season-mid: 43 45 110;
+    --color-season-upperMid: 85 31 76;
+    --color-season-high: 131 16 40;
+    --color-season-superHigh: 180 0 0;
   }
 
   :root.light {
@@ -199,6 +205,12 @@
     --color-offer: 22 183 197;
     --color-supplier: 87 202 255;
     --color-accommodation: 0 101 148;
+
+    --color-season-low: 191 217 255;
+    --color-season-mid: 207 210 238;
+    --color-season-upperMid: 222 203 223;
+    --color-season-high: 237 196 207;
+    --color-season-superHigh: 255 188 188;
   }
 
   :root.coffee {
@@ -301,6 +313,12 @@
     --color-offer-contrast: 255 255 255; /* White for Contrast */
     --color-supplier: 134 94 66; /* Coffee Supplier Brown */
     --color-accommodation: 119 84 58; /* Coffee Accommodation Brown */
+
+    --color-season-low: 0 58 143;
+    --color-season-mid: 43 45 110;
+    --color-season-upperMid: 85 31 76;
+    --color-season-high: 131 16 40;
+    --color-season-superHigh: 180 0 0;
   }
 
   :root.sage {
@@ -402,6 +420,12 @@
     --color-offer: 105 118 79;
     --color-supplier: 114 128 86;
     --color-accommodation: 99 111 74;
+
+    --color-season-low: 0 58 143;
+    --color-season-mid: 43 45 110;
+    --color-season-upperMid: 85 31 76;
+    --color-season-high: 131 16 40;
+    --color-season-superHigh: 180 0 0;
   }
 
   :root.monochrome {
@@ -503,5 +527,11 @@
     --color-offer: 160 160 160;
     --color-supplier: 170 170 170;
     --color-accommodation: 180 180 180;
+
+    --color-season-low: 0 58 143;
+    --color-season-mid: 43 45 110;
+    --color-season-upperMid: 85 31 76;
+    --color-season-high: 131 16 40;
+    --color-season-superHigh: 180 0 0;
   }
 }

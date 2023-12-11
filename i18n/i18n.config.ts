@@ -116,6 +116,36 @@ export default {
           },
         },
 
+        servicesCard: {
+          title: "Extra Costs & Services",
+          titleFees: "Fees",
+
+          labels: {
+            other: "Other",
+
+            administrationFees: "Administration Fee",
+            handlingFees: "Handling Fees",
+            otherFees: "Other Fees",
+          },
+
+          editModal: {
+            title: "Edit Extra Costs & Services",
+          },
+        },
+
+        documentsCard: {
+          title: "{count} Documents",
+          latest: "Latest",
+
+          tooltips: {
+            creator: "Creator",
+            createdOn: "Created on",
+            id: "ID",
+
+            createDocument: "Create a document",
+          },
+        },
+
         offerTable: {
           createOffer: "Create Offer",
           noOffersFound: "No offers found!",
