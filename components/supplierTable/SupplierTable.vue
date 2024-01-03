@@ -2,7 +2,7 @@
   <Table :data="suppliers" :columns="columns" :no-matches-found-text="t('components.supplierTable.noSuppliersFound')">
     <template #toolbar>
       <div class="w-full flex justify-end">
-        <Button variant="cta" :label="t('components.supplierTable.createSupplier')" />
+        <Button variant="cta" :label="t('components.supplierTable.createSupplier')" @click="openCreateModal" />
       </div>
     </template>
 
@@ -16,6 +16,9 @@
         @click="navigateTo(`/suppliers/${supplier.id}`)"
       >
         <template #fullname>
+          <div class="absolute top-0 left-0 flex gap-x-1">
+            <Badge v-if="supplier.isPseudo" variant="neutral" compact>PSEUDO</Badge>
+          </div>
           <CodeNameDisplay icon="user" :name="`${supplier.firstname} ${supplier.lastname}`" :code="supplier.id" />
         </template>
 
@@ -57,19 +60,243 @@
       <div></div>
     </template>
   </Table>
+
+  <!-- Modal to create new supplier -->
+  <Modal :title="t('components.supplierTable.createModal.title')" :open="createModalOpen" @close="closeCreateModal">
+    <Formal v-if="onCreatePage" v-model="createSupplierData" ref="createSupplierFormRef" class="space-y-4" compact>
+      <!-- Section: General -->
+      <section class="flex flex-col md:flex-row gap-x-2">
+        <FormalInput
+          name="countryOfAccommodation"
+          type="dropdown"
+          :label="t('inputs.countryOfAccommodation.label')"
+          :options="convertCodeNameToLabelValue(staticStore.getCountries ?? [])"
+          :prefix-icon="getCountryFlag(createSupplierData.countryOfAccommodation)"
+          validation="required"
+          :validation-messages="{ required: t('inputs.countryOfAccommodation.validation.required') }"
+        />
+
+        <FormalInput name="companyType" type="text" :label="t('inputs.companyType.label')" disabled />
+      </section>
+
+      <!-- Section: Name -->
+      <section class="space-y-2 pt-6">
+        <Heading appearance="title5" render-as="h5">
+          {{ $t("components.supplierTable.createModal.titleName") }}
+        </Heading>
+
+        <FormalInput
+          name="salutation"
+          type="radiobuttons"
+          :label="t('inputs.salutation.label')"
+          :options="getSalutationOptions()"
+          validation="required"
+          :validation-messages="{ required: t('inputs.salutation.validation.required') }"
+        />
+
+        <div class="flex flex-col md:flex-row gap-x-2">
+          <FormalInput
+            name="firstname"
+            type="text"
+            :label="t('inputs.firstname.label')"
+            validation="required|max:40"
+            :validation-messages="{ required: t('inputs.firstname.validation.required'), max: t('inputs.firstname.validation.max', 40) }"
+          />
+          <FormalInput
+            name="lastname"
+            type="text"
+            :label="t('inputs.lastname.label')"
+            validation="required|max:40"
+            :validation-messages="{ required: t('inputs.lastname.validation.required'), max: t('inputs.lastname.validation.max', 40) }"
+          />
+        </div>
+      </section>
+
+      <!-- Section: Address -->
+      <section class="space-y-2 pt-6">
+        <Heading appearance="title5" render-as="h5">
+          {{ $t("components.supplierTable.createModal.titleAddress") }}
+        </Heading>
+
+        <FormalInput
+          name="streetAndNumber"
+          type="text"
+          :label="t('inputs.streetAndNumber.label')"
+          validation="required|max:40"
+          :validation-messages="{
+            required: t('inputs.streetAndNumber.validation.required'),
+            max: t('inputs.streetAndNumber.validation.max', 40),
+          }"
+        />
+
+        <div class="flex flex-col md:flex-row gap-x-2">
+          <FormalInput
+            name="zip"
+            type="text"
+            :label="t('inputs.zip.label')"
+            validation="required"
+            :validation-messages="{ required: t('inputs.zip.validation.required') }"
+          />
+          <FormalInput
+            name="place"
+            type="text"
+            :label="t('inputs.place.label')"
+            validation="required|max:40"
+            :validation-messages="{ required: t('inputs.place.validation.required'), max: t('inputs.place.validation.max', 40) }"
+          />
+          <FormalInput
+            name="country"
+            type="dropdown"
+            :label="t('inputs.country.label')"
+            :options="convertCodeNameToLabelValue(staticStore.getCountries ?? [])"
+            :prefix-icon="getCountryFlag(createSupplierData.country)"
+            validation="required"
+            :validation-messages="{ required: t('inputs.country.validation.required') }"
+          />
+        </div>
+      </section>
+
+      <!-- Section: Contact -->
+      <section class="space-y-2 pt-6">
+        <Heading appearance="title5" render-as="h5">
+          {{ $t("components.supplierTable.createModal.titleContact") }}
+        </Heading>
+
+        <FormalInput
+          name="email"
+          type="email"
+          :label="t('inputs.email.label')"
+          prefix-icon="mail-send"
+          validation="required|email"
+          :validation-messages="{ required: t('inputs.email.validation.required'), email: t('inputs.email.validation.email') }"
+        />
+        <FormalInput
+          name="phone"
+          type="phone"
+          :label="t('inputs.phone.label')"
+          number-label="Mobile Number"
+          prefix-icon="phone"
+          validation="required"
+          :validation-messages="{ required: t('inputs.phone.validation.required') }"
+        />
+        <FormalInput
+          name="language"
+          type="dropdown"
+          :label="t('inputs.languages.label', 1)"
+          :options="getCommunicationLanguageOptions()"
+          prefix-icon="global"
+          validation="required"
+          :validation-messages="{ required: t('inputs.languages.validation.required') }"
+        />
+      </section>
+
+      <!-- Section: Finance -->
+      <section class="space-y-2 pt-6">
+        <Heading appearance="title5" render-as="h5">
+          {{ $t("components.supplierTable.createModal.titleFinance") }}
+        </Heading>
+
+        <FormalInput
+          name="paymentPeriod"
+          type="dropdown"
+          :label="t('inputs.paymentPeriod.label')"
+          :options="getPaymentPeriodOptions()"
+          validation="required"
+          :validation-messages="{ required: t('inputs.paymentPeriod.validation.required') }"
+        />
+      </section>
+    </Formal>
+
+    <section v-if="!onCreatePage" class="space-y-4">
+      <MessageCard variant="info" style-variant="tinted">
+        {{ t("components.supplierTable.createModal.supplierEmailAlreadyExists") }}
+      </MessageCard>
+
+      <Table :data="fullSupplierList" :columns="selectColumns">
+        <template #tbody="{ filteredData }">
+          <TableRow v-for="(supplier, index) in filteredData" :entry="supplier" :columns="selectColumns" class="cursor-pointer" hoverable>
+            <template #fullname>
+              <div class="absolute top-0 left-0">
+                <Badge v-if="supplier.isPseudo" variant="neutral" compact>{{ t("general.badges.pseudo") }}</Badge>
+                <Badge v-if="index === 0" variant="theme" compact>{{ t("general.badges.pseudo") }}</Badge>
+              </div>
+
+              <CodeNameDisplay icon="user" :name="`${supplier.firstname} ${supplier.lastname}`" :code="supplier.id" />
+            </template>
+
+            <template #country>
+              <div class="flex gap-x-2">
+                <Icon :graphic="supplier.country.toLowerCase()" class="w-6 h-6" />
+                {{ supplier.country }}
+              </div>
+            </template>
+
+            <template #roles>
+              <div class="flex gap-x-2">
+                <Icon v-if="supplier.roles.includes('proprietor')" graphic="home" class="w-6 h-6" />
+                <Icon v-if="supplier.roles.includes('keyholder')" graphic="key" class="w-6 h-6" />
+              </div>
+            </template>
+
+            <template #actions>
+              <Button v-if="index === 0" variant="theme" @click="createSupplier">Create</Button>
+              <Button v-else variant="theme" outlined @click="selectSupplier(supplier)">Choose</Button>
+            </template>
+          </TableRow>
+        </template>
+      </Table>
+    </section>
+
+    <template #footer>
+      <Button variant="neutral" :label="t('buttons.cancel')" @click="closeCreateModal" />
+      <Button variant="cta" :label="t('components.supplierTable.createModal.createSupplier')" @click="attemptCreateSupplier" />
+    </template>
+  </Modal>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
-import { Button, Icon, Table, TableRow } from "webcc-ui-components";
+import { Badge, Button, Formal, FormalInput, Heading, Icon, MessageCard, Modal, Table, TableRow } from "webcc-ui-components";
 
 import CodeNameDisplay from "@/codeNameDisplay/CodeNameDisplay.vue";
 
 const { t } = useI18n();
+const { $toast } = useNuxtApp();
+const { getCommunicationLanguageOptions, getPaymentPeriodOptions, getSalutationOptions } = useStaticData();
+const { convertCodeNameToLabelValue, getCountryFlag, extractValue } = useUtils();
+const authStore = useAuthStore();
+const staticStore = useStaticStore();
+
+const createSupplierFormRef = ref();
 
 const suppliers = ref<SupplierListResponse>([]);
+const suppliersMatchingEmail = ref<SupplierListResponse>([]);
 const isLoading = ref(false);
+const onCreatePage = ref(true);
+const createModalOpen = ref(false);
+const createSupplierData = ref<CreateSupplierStructure>({
+  countryOfAccommodation: authStore.getUserCountry ?? "",
+  companyType: "Interhome",
+
+  salutation: "",
+  firstname: "",
+  lastname: "",
+
+  streetAndNumber: "",
+  zip: "",
+  place: "",
+  country: "",
+
+  email: "",
+  phone: {
+    prefix: "",
+    number: "",
+  },
+  language: "",
+
+  paymentPeriod: "",
+});
 
 /**
  * Columns which are displayed in the table.
@@ -85,6 +312,38 @@ const columns = computed(() => [
 ]);
 
 /**
+ * Columns which are displayed in the table when the user is on the second page of the modal, selecting a supplier.
+ */
+const selectColumns = computed(() => [
+  { key: "fullname", label: t("inputs.fullname.label") },
+  { key: "country", label: `${t("inputs.country.label")} & ${t("inputs.email.label")}` },
+  { key: "roles", label: t("inputs.roles.label") },
+  { key: "actions", label: t("inputs.actions.label") },
+]);
+
+/**
+ * A list of all the suppliers which match the new suppliers email + the new supplier.
+ */
+const fullSupplierList = computed(() => [
+  {
+    address: {
+      country: extractValue(createSupplierData.value.country),
+      place: createSupplierData.value.place,
+      street: createSupplierData.value.streetAndNumber,
+      zip: createSupplierData.value.zip,
+    },
+    country: extractValue(createSupplierData.value.countryOfAccommodation),
+    firstname: createSupplierData.value.firstname,
+    lastname: createSupplierData.value.lastname,
+    email: createSupplierData.value.email,
+    roles: [],
+    id: `XX-XXXXX`,
+    isNew: true,
+  },
+  ...suppliersMatchingEmail.value,
+]);
+
+/**
  * Fetch the suppliers from the API and manage the loading state.
  */
 const fetchSuppliers = async () => {
@@ -96,4 +355,102 @@ const fetchSuppliers = async () => {
 onBeforeMount(async () => {
   await fetchSuppliers();
 });
+
+/**
+ * Open the modal to create a new supplier.
+ */
+const openCreateModal = () => {
+  createModalOpen.value = true;
+};
+
+/**
+ * Close the modal to create a new supplier.
+ */
+const closeCreateModal = () => {
+  createModalOpen.value = false;
+};
+
+/**
+ * Attempt to create a new supplier. This will check if a supplier with the same email already
+ * exists and navigate the user to a second page in the modal where he can choose an existing
+ * supplier or create a new one with the data entered.
+ */
+const attemptCreateSupplier = async () => {
+  if (!createSupplierFormRef.value?.validateForm()) return;
+
+  try {
+    // Check if a supplier with the same email already exists
+    const suppliersWithEmail = await useSupplierList({
+      brand: "I",
+      suppliercountry: extractValue(createSupplierData.value.countryOfAccommodation),
+      email: createSupplierData.value.email,
+    });
+
+    // If there are suppliers with the same email, navigate the user to a second page in the modal
+    if (suppliersWithEmail?.length) {
+      suppliersMatchingEmail.value = suppliersWithEmail;
+      onCreatePage.value = false;
+      return;
+    }
+
+    // Otherwise, create a new supplier
+    await createSupplier();
+  } catch (error) {
+    console.error(
+      `[MyTool Error] Error while checking if a supplier with this email (${createSupplierData.value.email}) already exists: `,
+      error
+    );
+    $toast.error(t("components.supplierTable.createModal.toasts.checkSupplierError"));
+  }
+};
+
+/**
+ * Create a new supplier with all the information from the form.
+ */
+const createSupplier = async () => {
+  try {
+    // Create the supplier object which will be used in the request to the API
+    const newSupplier = {
+      // Metadata
+      isPseudo: true,
+      brand: "I",
+      country: extractValue(createSupplierData.value.countryOfAccommodation),
+
+      // Address
+      address: {
+        salutation: extractValue(createSupplierData.value.salutation),
+        firstname: createSupplierData.value.firstname,
+        lastname: createSupplierData.value.lastname,
+        streetAndNumber: createSupplierData.value.streetAndNumber,
+        zip: createSupplierData.value.zip,
+        place: createSupplierData.value.place,
+        country: extractValue(createSupplierData.value.country),
+      },
+
+      // Contact
+      emails: [{ type: "MAIL", data: createSupplierData.value.email, main: true }],
+      phoneNumbers: [
+        { type: "MOB", data: createSupplierData.value.phone.number, country: createSupplierData.value.phone.prefix.value, main: true },
+      ],
+      languages: [extractValue(createSupplierData.value.language).toUpperCase()],
+
+      // Finance
+      paymentPeriod: extractValue(createSupplierData.value.paymentPeriod),
+    };
+
+    // Create the new supplier and redirect the user to the supplier detail page
+    const createdSupplier = await useSupplierCreate(newSupplier);
+    navigateTo(`/suppliers/${createdSupplier.id}`);
+  } catch (error) {
+    console.error(`[MyTool Error] Error while creating a new supplier: `, error);
+    $toast.error(t("components.supplierTable.createModal.toasts.createSupplierError"));
+  }
+};
+
+/**
+ * Select an existing supplier from the list of suppliers with the same email.
+ */
+const selectSupplier = (supplier: any) => {
+  navigateTo(`/suppliers/${supplier.id}`);
+};
 </script>

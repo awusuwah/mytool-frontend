@@ -132,3 +132,11 @@ type OfferTurnover = {
   purchaseNet: string;
   sales: string;
 };
+
+type OfferData = {
+  countries: CodeName[];
+  regions: CodeName[];
+  places: CodeName[];
+
+  // TODO: Enhance with all the values
+};

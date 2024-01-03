@@ -16,6 +16,12 @@
         @click="navigateTo(`/offers/${offer.id}`)"
       >
         <template #supplier>
+          <div class="absolute top-0 left-0 flex gap-x-1">
+            <Badge :variant="getStatusColor(offer.status)" compact>
+              {{ getStatusText(offer.status) }}
+            </Badge>
+            <Badge v-if="isPseudo(offer)" variant="neutral" compact>PSEUDO</Badge>
+          </div>
           <CodeNameDisplay icon="user" :name="offer.supplier.label" :code="offer.supplier.code" />
         </template>
 
@@ -32,11 +38,11 @@
         </template>
 
         <template #contractDate>
-          {{ offer.creationDate }}
+          {{ formatDate(offer.creationDate) }}
         </template>
 
         <template #sendDate>
-          {{ offer.sendOutDate }}
+          {{ formatDate(offer.sendOutDate) }}
         </template>
 
         <template #document>
@@ -70,11 +76,13 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { Button, IconButton, Table, TableRow, Tooltip } from "webcc-ui-components";
+import { Badge, Button, IconButton, Table, TableRow, Tooltip } from "webcc-ui-components";
 
 import CodeNameDisplay from "@/codeNameDisplay/CodeNameDisplay.vue";
 
 const { t } = useI18n();
+const { formatDate } = useDateUtils();
+const { getStatusColor, getStatusText } = useOfferUtils();
 
 const offers = ref<OfferListResponse>([]);
 const isLoading = ref(false);
@@ -100,6 +108,15 @@ const fetchOffers = async () => {
   isLoading.value = true;
   offers.value = (await useOfferList({ bo: "FR075" })) ?? [];
   isLoading.value = false;
+};
+
+/**
+ * Check if the offer is pseudo.
+ */
+const isPseudo = (offer: OfferShort) => {
+  // if the offer.accom.code starts with three letters before the first number, the offer is pseudo
+  const pseudoRegex = /^([a-zA-Z]{3})\d+/;
+  return pseudoRegex.test(offer.accom.code);
 };
 
 onBeforeMount(async () => {

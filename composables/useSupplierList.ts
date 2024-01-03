@@ -32,4 +32,5 @@ export default async function useSupplierList(params: SupplierListRequestParams 
 type SupplierListRequestParams = {
   brand?: string;
   suppliercountry?: string;
+  email?: string;
 };

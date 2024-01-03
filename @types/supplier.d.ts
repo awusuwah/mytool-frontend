@@ -45,3 +45,23 @@ type SupplierContact = {
   data: string;
   main: boolean;
 };
+
+type CreateSupplierStructure = {
+  countryOfAccommodation: ValueLabel | string;
+  companyType: string;
+
+  salutation: string;
+  firstname: string;
+  lastname: string;
+
+  streetAndNumber: string;
+  zip: string;
+  place: string;
+  country: string | ValueLabel;
+
+  email: string;
+  phone: any;
+  language: string | ValueLabel;
+
+  paymentPeriod: string | ValueLabel;
+};

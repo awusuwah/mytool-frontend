@@ -16,6 +16,7 @@ import { AllIcons } from "webcc-ui-components";
 
 import { useThemeStore } from "~/stores/theme";
 import { syncLocalStorage } from "~/utils/localStorage";
+import { useStaticStore } from "~/stores/static";
 
 const themeStore = useThemeStore();
 const currentTheme = computed(() => themeStore.theme);
@@ -29,7 +30,7 @@ useHead({
   },
 });
 
-onMounted(() => {
+onMounted(async () => {
   syncLocalStorage();
 
   // Check if the user has a previously selected theme
@@ -42,5 +43,9 @@ onMounted(() => {
       themeStore.setTheme("light");
     }
   }
+
+  // Preload the countries into the store
+  const responseData = await useOfferData();
+  useStaticStore().setCountries(responseData?.countries ?? null);
 });
 </script>

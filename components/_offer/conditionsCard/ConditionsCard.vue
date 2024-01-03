@@ -7,10 +7,10 @@
       <DataDisplay :label="t('components.conditionsCard.labels.contractYears')" :value="contractYears" :is-loading="isLoading" />
 
       <!-- Start- & End Date -->
-      <DataDisplay :label="t('components.conditionsCard.labels.startDate')" :value="contract?.start" :is-loading="isLoading" />
+      <DataDisplay :label="t('components.conditionsCard.labels.startDate')" :value="formatDate(contract?.start)" :is-loading="isLoading" />
       <DataDisplay
         :label="t('components.conditionsCard.labels.endDate')"
-        :value="contract?.end"
+        :value="formatDate(contract?.end)"
         :is-loading="isLoading"
         class="@lg/datagrid:col-span-2"
       />
@@ -49,6 +49,7 @@ import DataDisplay from "@/dataDisplay/DataDisplay.vue";
 import DataDisplayGrid from "@/dataDisplay/DataDisplayGrid.vue";
 
 const { t } = useI18n();
+const { formatDate } = useDateUtils();
 
 const props = defineProps({
   // The contract which is being displayed

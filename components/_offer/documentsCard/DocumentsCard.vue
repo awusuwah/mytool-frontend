@@ -12,7 +12,7 @@
 
           <span>
             <b>{{ t("components.documentsCard.tooltips.createdOn") }}:</b>
-            {{ document.createdOn }}
+            {{ formatDate(document.createdOn, true) }}
           </span>
 
           <span>
@@ -55,6 +55,7 @@
 import { Badge, Card, Heading, Icon, Tooltip } from "webcc-ui-components";
 
 const { t } = useI18n();
+const { formatDate } = useDateUtils();
 
 const props = defineProps({
   // The documents which are being displayed
