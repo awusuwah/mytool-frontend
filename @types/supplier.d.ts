@@ -65,3 +65,10 @@ type CreateSupplierStructure = {
 
   paymentPeriod: string | ValueLabel;
 };
+
+type FilterSupplierStructure = {
+  supplierNumber: string;
+  email: string;
+  firstname: string;
+  lastname: string;
+};

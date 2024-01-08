@@ -12,15 +12,15 @@ export default function useDateUtils() {
    * @param { string } date - The date string to format.
    * @param { boolean } withTime - If the time should be included in the formatted date.
    */
-  const formatDate = (date: string, withTime: boolean = false) => {
+  const formatDate = (date: Date | string, formatTemplate: string = FORMAT, withTime: boolean = false) => {
     try {
       if (!date) return "";
 
-      // Parse the date string
-      const parsedDate = parseISO(date);
+      // Check if date is a string, if so, parse it
+      const parsedDate = typeof date === "string" ? parseISO(date) : date;
 
       // If the time should be included or not
-      const dateFormat = withTime ? `${FORMAT} hh:mm:ss` : FORMAT;
+      const dateFormat = withTime ? `${formatTemplate} hh:mm:ss` : formatTemplate;
 
       // Format the date
       return format(parsedDate, dateFormat);

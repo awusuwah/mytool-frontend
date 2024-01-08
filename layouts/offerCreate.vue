@@ -3,9 +3,7 @@
     <Navigation />
 
     <main :class="mainClasses">
-      <div class="@container/main flex flex-col gap-2 p-4">
-        <slot />
-      </div>
+      <slot />
     </main>
   </div>
 </template>
@@ -16,12 +14,8 @@ import Navigation from "@/navigation/Navigation.vue";
 
 import { useAppStore } from "~/stores/app";
 
-const route = useRoute();
 const appStore = useAppStore();
-const activeStore = useDataStore();
-
-const supplier = ref<Supplier | undefined>(undefined);
-const isLoading = ref(false);
+const creatingStore = useCreatingStore();
 
 // Determine if the sidebar is open
 const sidebarOpen = computed(() => appStore.sidebarOpen);
@@ -35,16 +29,7 @@ const mainClasses = computed(() => ({
   "md:ml-16": !sidebarOpen.value,
 }));
 
-/**
- * Fetch the supplier from the API and manage the loading state.
- */
-const fetchSupplier = async () => {
-  isLoading.value = true;
-  supplier.value = await useSupplierDetail(route.params.id as string);
-  isLoading.value = false;
-};
-
-onBeforeMount(async () => {
-  await fetchSupplier();
+onBeforeUnmount(() => {
+  creatingStore.clearCreatingOffer();
 });
 </script>

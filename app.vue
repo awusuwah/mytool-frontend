@@ -44,6 +44,8 @@ onMounted(async () => {
     }
   }
 
+  console.log("mounted app.vue");
+
   // Preload the countries into the store
   const responseData = await useOfferData();
   useStaticStore().setCountries(responseData?.countries ?? null);

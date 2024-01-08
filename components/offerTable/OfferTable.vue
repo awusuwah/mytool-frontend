@@ -2,7 +2,7 @@
   <Table :data="offers ?? []" :columns="columns" :no-matches-found-text="t('components.offerTable.noOffersFound')">
     <template #toolbar>
       <div class="w-full flex justify-end">
-        <Button variant="cta" :label="t('components.offerTable.createOffer')" @click="navigateTo('/offers/create/')" />
+        <Button variant="cta" :label="t('components.offerTable.createOffer')" @click="navigateTo('/offers/create')" />
       </div>
     </template>
 

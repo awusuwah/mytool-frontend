@@ -4,6 +4,18 @@
  */
 export default function useStaticData() {
   /**
+   * Get the accommodation type options.
+   */
+  const getAccommodationTypeOptions = () => {
+    const { t } = useI18n();
+
+    return [
+      { value: "A", label: t("general.accommodationType.A") },
+      { value: "H", label: t("general.accommodationType.H") },
+    ];
+  };
+
+  /**
    * Get the communication language options.
    */
   const getCommunicationLanguageOptions = () => {
@@ -28,6 +40,20 @@ export default function useStaticData() {
       { value: "ru", label: t("general.language.ru") },
       { value: "sv", label: t("general.language.sv") },
       { value: "tr", label: t("general.language.tr") },
+    ];
+  };
+
+  /**
+   * Get the contract type options.
+   */
+  const getContractTypeOptions = () => {
+    const { t } = useI18n();
+
+    return [
+      { value: "N", label: t("general.contractType.N") },
+      { value: "S", label: t("general.contractType.S") },
+      { value: "B", label: t("general.contractType.B") },
+      { value: "BC", label: t("general.contractType.BC") },
     ];
   };
 
@@ -63,7 +89,9 @@ export default function useStaticData() {
   };
 
   return {
+    getAccommodationTypeOptions,
     getCommunicationLanguageOptions,
+    getContractTypeOptions,
     getPaymentPeriodOptions,
     getSalutationOptions,
   };

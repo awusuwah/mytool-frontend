@@ -63,149 +63,7 @@
 
   <!-- Modal to create new supplier -->
   <Modal :title="t('components.supplierTable.createModal.title')" :open="createModalOpen" @close="closeCreateModal">
-    <Formal v-if="onCreatePage" v-model="createSupplierData" ref="createSupplierFormRef" class="space-y-4" compact>
-      <!-- Section: General -->
-      <section class="flex flex-col md:flex-row gap-x-2">
-        <FormalInput
-          name="countryOfAccommodation"
-          type="dropdown"
-          :label="t('inputs.countryOfAccommodation.label')"
-          :options="convertCodeNameToLabelValue(staticStore.getCountries ?? [])"
-          :prefix-icon="getCountryFlag(createSupplierData.countryOfAccommodation)"
-          validation="required"
-          :validation-messages="{ required: t('inputs.countryOfAccommodation.validation.required') }"
-        />
-
-        <FormalInput name="companyType" type="text" :label="t('inputs.companyType.label')" disabled />
-      </section>
-
-      <!-- Section: Name -->
-      <section class="space-y-2 pt-6">
-        <Heading appearance="title5" render-as="h5">
-          {{ $t("components.supplierTable.createModal.titleName") }}
-        </Heading>
-
-        <FormalInput
-          name="salutation"
-          type="radiobuttons"
-          :label="t('inputs.salutation.label')"
-          :options="getSalutationOptions()"
-          validation="required"
-          :validation-messages="{ required: t('inputs.salutation.validation.required') }"
-        />
-
-        <div class="flex flex-col md:flex-row gap-x-2">
-          <FormalInput
-            name="firstname"
-            type="text"
-            :label="t('inputs.firstname.label')"
-            validation="required|max:40"
-            :validation-messages="{ required: t('inputs.firstname.validation.required'), max: t('inputs.firstname.validation.max', 40) }"
-          />
-          <FormalInput
-            name="lastname"
-            type="text"
-            :label="t('inputs.lastname.label')"
-            validation="required|max:40"
-            :validation-messages="{ required: t('inputs.lastname.validation.required'), max: t('inputs.lastname.validation.max', 40) }"
-          />
-        </div>
-      </section>
-
-      <!-- Section: Address -->
-      <section class="space-y-2 pt-6">
-        <Heading appearance="title5" render-as="h5">
-          {{ $t("components.supplierTable.createModal.titleAddress") }}
-        </Heading>
-
-        <FormalInput
-          name="streetAndNumber"
-          type="text"
-          :label="t('inputs.streetAndNumber.label')"
-          validation="required|max:40"
-          :validation-messages="{
-            required: t('inputs.streetAndNumber.validation.required'),
-            max: t('inputs.streetAndNumber.validation.max', 40),
-          }"
-        />
-
-        <div class="flex flex-col md:flex-row gap-x-2">
-          <FormalInput
-            name="zip"
-            type="text"
-            :label="t('inputs.zip.label')"
-            validation="required"
-            :validation-messages="{ required: t('inputs.zip.validation.required') }"
-          />
-          <FormalInput
-            name="place"
-            type="text"
-            :label="t('inputs.place.label')"
-            validation="required|max:40"
-            :validation-messages="{ required: t('inputs.place.validation.required'), max: t('inputs.place.validation.max', 40) }"
-          />
-          <FormalInput
-            name="country"
-            type="dropdown"
-            :label="t('inputs.country.label')"
-            :options="convertCodeNameToLabelValue(staticStore.getCountries ?? [])"
-            :prefix-icon="getCountryFlag(createSupplierData.country)"
-            validation="required"
-            :validation-messages="{ required: t('inputs.country.validation.required') }"
-          />
-        </div>
-      </section>
-
-      <!-- Section: Contact -->
-      <section class="space-y-2 pt-6">
-        <Heading appearance="title5" render-as="h5">
-          {{ $t("components.supplierTable.createModal.titleContact") }}
-        </Heading>
-
-        <FormalInput
-          name="email"
-          type="email"
-          :label="t('inputs.email.label')"
-          prefix-icon="mail-send"
-          validation="required|email"
-          :validation-messages="{ required: t('inputs.email.validation.required'), email: t('inputs.email.validation.email') }"
-        />
-        <FormalInput
-          name="phone"
-          type="phone"
-          :label="t('inputs.phone.label')"
-          number-label="Mobile Number"
-          prefix-icon="phone"
-          validation="required"
-          :validation-messages="{ required: t('inputs.phone.validation.required') }"
-        />
-        <FormalInput
-          name="language"
-          type="dropdown"
-          :label="t('inputs.languages.label', 1)"
-          :options="getCommunicationLanguageOptions()"
-          prefix-icon="global"
-          validation="required"
-          :validation-messages="{ required: t('inputs.languages.validation.required') }"
-        />
-      </section>
-
-      <!-- Section: Finance -->
-      <section class="space-y-2 pt-6">
-        <Heading appearance="title5" render-as="h5">
-          {{ $t("components.supplierTable.createModal.titleFinance") }}
-        </Heading>
-
-        <FormalInput
-          name="paymentPeriod"
-          type="dropdown"
-          :label="t('inputs.paymentPeriod.label')"
-          :options="getPaymentPeriodOptions()"
-          validation="required"
-          :validation-messages="{ required: t('inputs.paymentPeriod.validation.required') }"
-        />
-      </section>
-    </Formal>
+    <CreatePseudoSupplierForm v-if="onCreatePage" ref="createPseudoSupplierFormRef" />
 
     <section v-if="!onCreatePage" class="space-y-4">
       <MessageCard variant="info" style-variant="tinted">
@@ -255,20 +113,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
-import { Badge, Button, Formal, FormalInput, Heading, Icon, MessageCard, Modal, Table, TableRow } from "webcc-ui-components";
+import { Badge, Button, Icon, MessageCard, Modal, Table, TableRow } from "webcc-ui-components";
 
 import CodeNameDisplay from "@/codeNameDisplay/CodeNameDisplay.vue";
+import CreatePseudoSupplierForm from "@/_supplier/create/CreatePseudoSupplierForm.vue";
 
 const { t } = useI18n();
 const { $toast } = useNuxtApp();
-const { getCommunicationLanguageOptions, getPaymentPeriodOptions, getSalutationOptions } = useStaticData();
-const { convertCodeNameToLabelValue, getCountryFlag, extractValue } = useUtils();
+const { extractValue } = useUtils();
 const authStore = useAuthStore();
-const staticStore = useStaticStore();
 
-const createSupplierFormRef = ref();
+const createPseudoSupplierFormRef = ref();
 
 const suppliers = ref<SupplierListResponse>([]);
 const suppliersMatchingEmail = ref<SupplierListResponse>([]);
@@ -376,71 +231,70 @@ const closeCreateModal = () => {
  * supplier or create a new one with the data entered.
  */
 const attemptCreateSupplier = async () => {
-  if (!createSupplierFormRef.value?.validateForm()) return;
+  const result = createPseudoSupplierFormRef.value?.getCreateSupplierData();
 
-  try {
-    // Check if a supplier with the same email already exists
-    const suppliersWithEmail = await useSupplierList({
-      brand: "I",
-      suppliercountry: extractValue(createSupplierData.value.countryOfAccommodation),
-      email: createSupplierData.value.email,
-    });
+  if (result.valid)
+    try {
+      // Check if a supplier with the same email already exists
+      const suppliersWithEmail = await useSupplierList({
+        brand: "I",
+        suppliercountry: extractValue(createSupplierData.value.countryOfAccommodation),
+        email: result.data.email,
+      });
 
-    // If there are suppliers with the same email, navigate the user to a second page in the modal
-    if (suppliersWithEmail?.length) {
-      suppliersMatchingEmail.value = suppliersWithEmail;
-      onCreatePage.value = false;
-      return;
+      // If there are suppliers with the same email, navigate the user to a second page in the modal
+      if (suppliersWithEmail?.length) {
+        suppliersMatchingEmail.value = suppliersWithEmail;
+        onCreatePage.value = false;
+        return;
+      }
+
+      // Otherwise, create a new supplier
+      await createSupplier(result.data);
+    } catch (error) {
+      console.error(
+        `[MyTool Error] Error while checking if a supplier with this email (${createSupplierData.value.email}) already exists: `,
+        error
+      );
+      $toast.error(t("components.supplierTable.createModal.toasts.checkSupplierError"));
     }
-
-    // Otherwise, create a new supplier
-    await createSupplier();
-  } catch (error) {
-    console.error(
-      `[MyTool Error] Error while checking if a supplier with this email (${createSupplierData.value.email}) already exists: `,
-      error
-    );
-    $toast.error(t("components.supplierTable.createModal.toasts.checkSupplierError"));
-  }
 };
 
 /**
  * Create a new supplier with all the information from the form.
  */
-const createSupplier = async () => {
+const createSupplier = async (sup: any) => {
   try {
     // Create the supplier object which will be used in the request to the API
     const newSupplier = {
       // Metadata
       isPseudo: true,
       brand: "I",
-      country: extractValue(createSupplierData.value.countryOfAccommodation),
+      country: extractValue(sup.countryOfAccommodation),
 
       // Address
       address: {
-        salutation: extractValue(createSupplierData.value.salutation),
-        firstname: createSupplierData.value.firstname,
-        lastname: createSupplierData.value.lastname,
-        streetAndNumber: createSupplierData.value.streetAndNumber,
-        zip: createSupplierData.value.zip,
-        place: createSupplierData.value.place,
-        country: extractValue(createSupplierData.value.country),
+        salutation: extractValue(sup.salutation),
+        firstname: sup.firstname,
+        lastname: sup.lastname,
+        streetAndNumber: sup.streetAndNumber,
+        zip: sup.zip,
+        place: sup.place,
+        country: extractValue(sup.country),
       },
 
       // Contact
-      emails: [{ type: "MAIL", data: createSupplierData.value.email, main: true }],
-      phoneNumbers: [
-        { type: "MOB", data: createSupplierData.value.phone.number, country: createSupplierData.value.phone.prefix.value, main: true },
-      ],
-      languages: [extractValue(createSupplierData.value.language).toUpperCase()],
+      emails: [{ type: "MAIL", data: sup.email, main: true }],
+      phoneNumbers: [{ type: "MOB", data: sup.phone.number, country: sup.phone.prefix.value, main: true }],
+      languages: [extractValue(sup.language).toUpperCase()],
 
       // Finance
-      paymentPeriod: extractValue(createSupplierData.value.paymentPeriod),
+      paymentPeriod: extractValue(sup.paymentPeriod),
     };
 
     // Create the new supplier and redirect the user to the supplier detail page
     const createdSupplier = await useSupplierCreate(newSupplier);
-    navigateTo(`/suppliers/${createdSupplier.id}`);
+    navigateTo(`/suppliers/${createdSupplier?.id}`);
   } catch (error) {
     console.error(`[MyTool Error] Error while creating a new supplier: `, error);
     $toast.error(t("components.supplierTable.createModal.toasts.createSupplierError"));

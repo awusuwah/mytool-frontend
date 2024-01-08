@@ -78,6 +78,10 @@ const authenticateUser = async () => {
       ],
     });
 
+    // Preload the countries into the store
+    const responseData = await useOfferData();
+    useStaticStore().setCountries(responseData?.countries ?? null);
+
     $toast.success(t("components.loginForm.toasts.success", { username: loginResponse.body.user.username }));
 
     await navigateTo("/settings");

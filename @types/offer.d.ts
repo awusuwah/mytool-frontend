@@ -138,5 +138,80 @@ type OfferData = {
   regions: CodeName[];
   places: CodeName[];
 
-  // TODO: Enhance with all the values
+  seasonModels: SeasonModel[];
+  calculationClasses: number[];
+  BOs: BuyingOffice[];
+};
+
+type OfferDataAttributes = {
+  attributes: any[];
+  rule: "USE-SEASONMODEL" | "USE-SMART-PRICING" | string;
+};
+
+type OfferDataPrices = {
+  prices: OfferPrice[];
+  turnovers: OfferTurnover[];
+};
+
+type CreateOfferStructure = {
+  country: ValueLabel | string;
+  region: ValueLabel | string;
+  place: ValueLabel | string;
+  newPlace: string;
+
+  accoType: ValueLabel | string;
+  accoName: string;
+  pax: number | string;
+  rooms: number | string;
+  bedrooms: number | string;
+
+  // Conditions
+  seasonModel: ValueLabel | string;
+  startDate: string;
+  adminFee: number | string;
+  contractType: ValueLabel | string;
+  margin: number | string;
+  calculationClass: ValueLabel | string;
+
+  // Relations
+  owner: SupplierShort | string;
+  purchaser: BuyingOffice | string;
+  buyingOffice: BuyingOffice | string;
+
+  // Attributes
+  role?: "USE-SEASONMODEL" | "USE-SMART-PRICING";
+  attributes?: {
+    [key: string]: string | number | boolean;
+  };
+};
+
+type ApiOfferStructure = {
+  accommodation: {
+    code: string;
+    name: string;
+    type: string;
+    country: string;
+    region: string;
+    place: string;
+    newPlaceName: string;
+    pax: number;
+    rooms: number;
+    bedrooms: number;
+  };
+  contract: {
+    seasonModel: string;
+    start: string;
+    length: number;
+    type: string;
+    gerance: number;
+    margin: number;
+    calculationClass: number;
+  };
+  supplier: string;
+  purchaser: string;
+  buyingOffice: string;
+
+  attributes?: any;
+
+  prices?: Price[];
 };

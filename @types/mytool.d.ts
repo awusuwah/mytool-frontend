@@ -57,3 +57,27 @@ type DailyWeekly = {
   daily: number;
   weekly: number;
 };
+
+type SeasonModel = {
+  id: string;
+  code: number;
+  name: string;
+  country: number;
+  validFrom: string;
+  validTo: string;
+  years: SeasonModelYear[];
+};
+
+type SeasonModelYear = {
+  year: number;
+  from: string;
+  to: string;
+};
+
+type BuyingOffice = {
+  code: string;
+  name: string;
+  country: string;
+  place: string;
+  type: string;
+};

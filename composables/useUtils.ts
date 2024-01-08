@@ -7,7 +7,7 @@ export default function useUtils() {
    *
    * @param { Array<CodeName> } codeNameArray - The array of code/name objects.
    */
-  const convertCodeNameToLabelValue = (codeNameArray: CodeName[]) => {
+  const convertCodeNameToLabelValue = (codeNameArray: CodeName[] | undefined): ValueLabel[] => {
     if (!codeNameArray) return [];
 
     return codeNameArray.map((codeName) => {
@@ -19,14 +19,62 @@ export default function useUtils() {
   };
 
   /**
+   * Convert an array of code/name objects to an array of label/value objects. This will also populate the
+   * `prefixIcon` property with the given icons.
+   *
+   * @param { Array<CodeName> } codeNameArray - The array of code/name objects.
+   */
+  const convertCodeNameToLabelValueWithIcons = (codeNameArray: CodeName[] | undefined): ValueLabel[] => {
+    if (!codeNameArray) return [];
+
+    return codeNameArray.map((codeName) => {
+      return {
+        label: codeName.name,
+        value: codeName.code,
+        prefixIcon: codeName.code.toLowerCase(),
+      };
+    });
+  };
+
+  /**
+   * Convert an array of season models to an array of label/value objects.
+   *
+   * @param { Array<SeasonModel> } seasonModelsArray - The array of season models.
+   */
+  const convertSeasonModelsToLabelValue = (seasonModelsArray: SeasonModel[] | undefined): ValueLabel[] => {
+    if (!seasonModelsArray) return [];
+
+    return seasonModelsArray.map((seasonModel) => {
+      return {
+        label: seasonModel.name,
+        value: seasonModel.id,
+        suffixText: seasonModel.code,
+      };
+    });
+  };
+
+  /**
    * Get the country flag for the given country code. This works well with dropdowns, where
    * both a string and label/value object are valid.
    */
   const getCountryFlag = (country: string | ValueLabel) => {
     if (!country) return "global";
+    if (typeof country !== "string" && !country.value) return "global";
 
     const countryCode = typeof country === "string" ? country : country.value;
     return countryCode.toLowerCase();
+  };
+
+  /**
+   * Get the name for the given country code.
+   *
+   * @param { String } countryCode - The country code to get the name for.
+   */
+  const getCountryName = (countryCode: string): string => {
+    const allCountries = useStaticStore().getCountries;
+    if (!allCountries) return "No Country";
+
+    return allCountries.find((country) => country.code.toLowerCase() === countryCode.toLowerCase())?.name ?? "";
   };
 
   /**
@@ -66,7 +114,10 @@ export default function useUtils() {
 
   return {
     convertCodeNameToLabelValue,
+    convertCodeNameToLabelValueWithIcons,
+    convertSeasonModelsToLabelValue,
     getCountryFlag,
+    getCountryName,
     getSalutationLabel,
     extractValue,
   };
